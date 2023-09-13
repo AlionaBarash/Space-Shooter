@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (transform.position.y <= -6.6)
+        if (transform.position.y <= -6.6f)
         {
             Destroy(this.gameObject);
         }

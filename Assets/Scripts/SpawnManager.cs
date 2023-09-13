@@ -7,9 +7,11 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField]
+    private GameObject _enemyContainer;
+    [SerializeField]
     private GameObject _enemyPrefab;
     [SerializeField]
-    private int _delayTime;
+    private float _delayTime;
     [SerializeField]
     private float _ySpawnPosition;
     [SerializeField]
@@ -28,7 +30,9 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnEnemies(float xSpawnPosition)
     {
-        Instantiate(_enemyPrefab, new Vector3(xSpawnPosition, _ySpawnPosition, 0), Quaternion.identity);
+        GameObject enemy = Instantiate(_enemyPrefab, new Vector3(xSpawnPosition, _ySpawnPosition, 0), Quaternion.identity);
+
+        enemy.transform.parent = _enemyContainer.transform;
     }
 
     IEnumerator SelectWave()
