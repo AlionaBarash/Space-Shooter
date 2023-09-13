@@ -14,6 +14,14 @@ public class Enemy : MonoBehaviour
          _rigidbody = GetComponent<Rigidbody2D>();   
     }
 
+    void Update()
+    {
+        if (transform.position.y <= -6.6)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void FixedUpdate()
     {
         _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
