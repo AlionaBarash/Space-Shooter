@@ -26,4 +26,14 @@ public class Enemy : MonoBehaviour
     {
         _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+
+            Destroy(this.gameObject);
+        }
+    }
 }
