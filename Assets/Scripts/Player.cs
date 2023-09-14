@@ -10,9 +10,16 @@ public class Player : MonoBehaviour
     private float _xRightLimit, _xLeftLimit;
     [SerializeField]
     private float _yUpperLimit, _yLowerLimit;
+    [SerializeField]
+    private GameObject _laserPrefab;
+    [SerializeField]
+    private float _yLaserPosition;
+    [SerializeField]
+    private float _reloadTime;
 
     private Rigidbody2D _rigidbody;
     private Vector2 _input;
+    private float _currentTime;
 
     void Awake()
     {
@@ -23,7 +30,24 @@ public class Player : MonoBehaviour
     {
         _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _speed;
 
+        LimitPlayerMovement();
 
+        _currentTime -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) && _currentTime <= 0)
+        {
+            ShootLaser();
+            _currentTime = _reloadTime;
+        }       
+    }
+
+    void FixedUpdate()
+    {
+        _rigidbody.MovePosition(_rigidbody.position + _input * Time.fixedDeltaTime);
+    }
+
+    private void LimitPlayerMovement()
+    {
         if (transform.position.x > _xRightLimit)
         {
             transform.position = new Vector2(_xLeftLimit, transform.position.y);
@@ -40,8 +64,10 @@ public class Player : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    private void ShootLaser()
     {
-        _rigidbody.MovePosition(_rigidbody.position + _input * Time.fixedDeltaTime);
+        Instantiate(_laserPrefab, 
+            new Vector3(transform.position.x, transform.position.y + _yLaserPosition, 0), 
+            Quaternion.identity);
     }
 }
