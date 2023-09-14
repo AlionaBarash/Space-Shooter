@@ -14,9 +14,12 @@ public class Player : MonoBehaviour
     private GameObject _laserPrefab;
     [SerializeField]
     private float _yLaserPosition;
+    [SerializeField]
+    private float _reloadTime;
 
     private Rigidbody2D _rigidbody;
     private Vector2 _input;
+    private float _currentTime;
 
     void Awake()
     {
@@ -29,9 +32,12 @@ public class Player : MonoBehaviour
 
         LimitPlayerMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        _currentTime -= Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space) && _currentTime <= 0)
         {
             ShootLaser();
+            _currentTime = _reloadTime;
         }       
     }
 
