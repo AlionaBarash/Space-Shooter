@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private float _speed;
@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private Vector2 _input;
     private float _currentTime;
+    private int _health = 3;
 
     void Awake()
     {
@@ -69,5 +70,15 @@ public class Player : MonoBehaviour
         Instantiate(_laserPrefab, 
             new Vector3(transform.position.x, transform.position.y + _yLaserPosition, 0), 
             Quaternion.identity);
+    }
+
+    public void Damage()
+    {
+        _health--;
+
+        if (_health == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

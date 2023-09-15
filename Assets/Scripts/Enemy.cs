@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private float _speed;
@@ -27,13 +27,8 @@ public class Enemy : MonoBehaviour
         _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void Damage()
     {
-        if(other.gameObject.tag == "Laser")
-        {
-            Destroy(other.gameObject);
-
-            Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);
     }
 }
