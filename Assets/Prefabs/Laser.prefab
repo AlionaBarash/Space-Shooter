@@ -162,3 +162,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 12
+  _enemyLaser: {fileID: 8090296054398346150, guid: bfaa7315e17d220448b40a7566d3c838, type: 3}

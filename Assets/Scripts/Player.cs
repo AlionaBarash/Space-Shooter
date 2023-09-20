@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour, IDamageable, IShootable
 {
     [SerializeField]
     private float _speed;
@@ -19,12 +19,18 @@ public class Player : MonoBehaviour, IDamageable
 
     private Rigidbody2D _rigidbody;
     private Vector2 _input;
+    private Vector2 _e;
     private float _currentTime;
     private int _health = 3;
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    void Start()
+    {
+       
     }
 
     void Update()
@@ -37,9 +43,9 @@ public class Player : MonoBehaviour, IDamageable
 
         if (Input.GetKeyDown(KeyCode.Space) && _currentTime <= 0)
         {
-            ShootLaser();
+            Shoot();
             _currentTime = _reloadTime;
-        }       
+        }
     }
 
     void FixedUpdate()
@@ -65,7 +71,7 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
-    private void ShootLaser()
+    public void Shoot()
     {
         Instantiate(_laserPrefab, 
             new Vector3(transform.position.x, transform.position.y + _yLaserPosition, 0), 
