@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour, IDamageable, IShootable
     private float _delayTime;
     private float _currentTime;
     private bool _isShooting;
+    private int _enemyShootingRandomID;
 
     void Awake()
     {
@@ -24,6 +25,8 @@ public class Enemy : MonoBehaviour, IDamageable, IShootable
     void Start()
     {
         _delayTime = Random.Range(0.5f, 1f);
+
+        _enemyShootingRandomID = Random.Range(1, 4);
     }
 
     void Update()
@@ -33,7 +36,7 @@ public class Enemy : MonoBehaviour, IDamageable, IShootable
             _delayTime -= Time.deltaTime;
         }
 
-        if (_delayTime <= 0 && !_isShooting)
+        if (_delayTime <= 0 && !_isShooting && _enemyShootingRandomID == 3)
         {
             Shoot();
             _isShooting = true;
