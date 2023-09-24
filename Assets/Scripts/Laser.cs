@@ -11,15 +11,12 @@ public class Laser : MonoBehaviour
     private GameObject _enemyLaser;
 
     private Rigidbody2D _rigidbody;
-    private Collider2D _collider;
     private bool _isEnemyShooting;
     private bool _ignoreShooter = true;
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-
-        _collider = GetComponent<Collider2D>();
     }
 
     void Update()
