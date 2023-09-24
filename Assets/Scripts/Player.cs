@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable, IShootable
+public class Player : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private float _speed;
@@ -19,18 +19,12 @@ public class Player : MonoBehaviour, IDamageable, IShootable
 
     private Rigidbody2D _rigidbody;
     private Vector2 _input;
-    private Vector2 _e;
-    private float _currentTime;
+    private float _canFire;
     private int _health = 3;
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-    }
-
-    void Start()
-    {
-       
     }
 
     void Update()
@@ -39,12 +33,13 @@ public class Player : MonoBehaviour, IDamageable, IShootable
 
         LimitPlayerMovement();
 
-        _currentTime -= Time.deltaTime;
+        _canFire -= Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space) && _currentTime <= 0)
+        if (Input.GetKeyDown(KeyCode.Space) && _canFire <= 0)
         {
             Shoot();
-            _currentTime = _reloadTime;
+
+            _canFire = _reloadTime;
         }
     }
 
@@ -76,6 +71,17 @@ public class Player : MonoBehaviour, IDamageable, IShootable
         Instantiate(_laserPrefab, 
             new Vector3(transform.position.x, transform.position.y + _yLaserPosition, 0), 
             Quaternion.identity);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Enemy enemy = other.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.Damage();
+
+            Damage();
+        }
     }
 
     public void Damage()

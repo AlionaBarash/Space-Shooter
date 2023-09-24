@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable, IShootable
+public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private float _speed;
@@ -12,10 +13,6 @@ public class Enemy : MonoBehaviour, IDamageable, IShootable
     private float _yEnemyLaserPosition;
 
     private Rigidbody2D _rigidbody;
-    private float _delayTime;
-    private float _currentTime;
-    private bool _isShooting;
-    private int _enemyShootingRandomID;
 
     void Awake()
     {
@@ -24,24 +21,11 @@ public class Enemy : MonoBehaviour, IDamageable, IShootable
 
     void Start()
     {
-        _delayTime = Random.Range(0.5f, 1f);
-
-        _enemyShootingRandomID = Random.Range(1, 4);
+        StartCoroutine(Shoot());
     }
 
     void Update()
     {
-        if (!_isShooting)
-        {
-            _delayTime -= Time.deltaTime;
-        }
-
-        if (_delayTime <= 0 && !_isShooting && _enemyShootingRandomID == 3)
-        {
-            Shoot();
-            _isShooting = true;
-        }
-
         if (transform.position.y <= -6.6f)
         {
             Destroy(this.gameObject);
@@ -53,11 +37,25 @@ public class Enemy : MonoBehaviour, IDamageable, IShootable
         _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
     }
 
-    public void Shoot()
+    IEnumerator Shoot()
     {
-        Instantiate(_enemyLaserPrefab,
-            new Vector3(transform.position.x, transform.position.y + _yEnemyLaserPosition, 0),
-            Quaternion.identity);
+        yield return new WaitForSeconds(Random.Range(0.5f, 1.7f));
+
+        int shootingEnemyID = Random.Range(1, 4);
+
+        if (shootingEnemyID == 3)
+        {
+            GameObject enemyLaser = Instantiate(_enemyLaserPrefab,
+                new Vector3(transform.position.x, transform.position.y + _yEnemyLaserPosition, 0),
+                Quaternion.identity);
+
+            var lasers = enemyLaser.GetComponentsInChildren<Laser>();
+
+            foreach (var laser in lasers)
+            {
+                laser.AssignEnemyLaser();
+            }
+        }
     }
 
     public void Damage()
