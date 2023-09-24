@@ -31,7 +31,7 @@ Transform:
   - {fileID: 1512705010076350574}
   - {fileID: 3159340027169808294}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &506851465217236803
 PrefabInstance:
@@ -47,11 +47,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3229232377365119205, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.74
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 3229232377365119205, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12
+      value: -0.79
       objectReference: {fileID: 0}
     - target: {fileID: 3229232377365119205, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
       propertyPath: m_LocalPosition.z
@@ -89,6 +89,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8279015650659669828, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
+      propertyPath: _enemyLaser
+      value: 
+      objectReference: {fileID: 8090296054398346150}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -113,11 +117,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3229232377365119205, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.74
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 3229232377365119205, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12
+      value: -0.79
       objectReference: {fileID: 0}
     - target: {fileID: 3229232377365119205, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
       propertyPath: m_LocalPosition.z
@@ -155,6 +159,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser
       objectReference: {fileID: 0}
+    - target: {fileID: 8279015650659669828, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
+      propertyPath: _enemyLaser
+      value: 
+      objectReference: {fileID: 8090296054398346150}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
