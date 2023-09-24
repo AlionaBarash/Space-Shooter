@@ -9,8 +9,6 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyContainer;
     [SerializeField]
-    private GameObject _enemyPrefab;
-    [SerializeField]
     private float _delayTime;
     [SerializeField]
     private float _ySpawnPosition;
@@ -28,11 +26,16 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SelectWave());
     }
 
-    private void SpawnEnemies(float xSpawnPosition)
+    private void SpawnEnemies(float xSpawnPosition, GameObject enemyPrefab)
     {
-        GameObject enemy = Instantiate(_enemyPrefab, new Vector3(xSpawnPosition, _ySpawnPosition, 0), Quaternion.identity);
+        GameObject enemy = Instantiate(enemyPrefab, new Vector3(xSpawnPosition, _ySpawnPosition, 0), Quaternion.identity);
 
         enemy.transform.parent = _enemyContainer.transform;
+    }
+
+    private void SpawnBoosters(float xSpawnPosition, GameObject powerupPrefab)
+    {
+        Instantiate(powerupPrefab, new Vector3(xSpawnPosition, _ySpawnPosition, 0), Quaternion.identity);
     }
 
     IEnumerator SelectWave()
@@ -44,11 +47,26 @@ public class SpawnManager : MonoBehaviour
 
             int randomWave = Random.Range(0, _waves.Length);
 
-            for (int i = 0; i < _waves[randomWave].enemyAmount; i++)
+            // один прогон цикла - один заспавненый элемент
+            for (int i = 0; i < _waves[randomWave].enemies.Length; i++)
             {
                 int randomIndex = Random.Range(0, _availableSpawnPositions.Count);
+
                 float xSpawnPosition = _availableSpawnPositions.ElementAt(randomIndex);
-                SpawnEnemies(xSpawnPosition);
+
+                SpawnEnemies(xSpawnPosition, _waves[randomWave].enemies[i]);
+
+                _availableSpawnPositions.Remove(xSpawnPosition);
+            }
+
+            for (int i = 0; i < _waves[randomWave].powerups.Length; i++)
+            {
+                int randomIndex = Random.Range(0, _availableSpawnPositions.Count);
+
+                float xSpawnPosition = _availableSpawnPositions.ElementAt(randomIndex);
+
+                SpawnBoosters(xSpawnPosition, _waves[randomWave].powerups[i]);
+
                 _availableSpawnPositions.Remove(xSpawnPosition);
             }
 

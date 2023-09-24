@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyContainer: {fileID: 1000300355}
-  _enemyPrefab: {fileID: 6607168211614404231, guid: 474281716991f984c88c4763bb450287, type: 3}
   _delayTime: 3
   _ySpawnPosition: 6.7
   _xSpawnPositions:
@@ -163,8 +162,16 @@ MonoBehaviour:
   - 3.8
   - 7.8
   _waves:
-  - enemyAmount: 1
-  - enemyAmount: 2
+  - enemies:
+    - {fileID: 6607168211614404231, guid: 474281716991f984c88c4763bb450287, type: 3}
+    powerups:
+    - {fileID: 1052661056700470647, guid: 279b820430ead1541bb290c3f79b7fcb, type: 3}
+  - enemies: []
+    powerups:
+    - {fileID: 534679620534909630, guid: 618c3d1075a458d41a1481ccfb513abb, type: 3}
+  - enemies: []
+    powerups:
+    - {fileID: 8474458394586556007, guid: 68a2795263a1c0a46a87625545df344d, type: 3}
 --- !u!4 &420405947
 Transform:
   m_ObjectHideFlags: 0
