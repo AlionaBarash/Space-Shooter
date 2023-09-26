@@ -153,18 +153,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyContainer: {fileID: 1000300355}
-  _enemyPrefab: {fileID: 6607168211614404231, guid: 474281716991f984c88c4763bb450287, type: 3}
   _delayTime: 3
   _ySpawnPosition: 6.7
   _xSpawnPositions:
-  - -7.8
-  - -3.8
+  - -7.7
+  - -3.85
   - 0
-  - 3.8
-  - 7.8
+  - 3.85
+  - 7.7
   _waves:
-  - enemyAmount: 1
-  - enemyAmount: 2
+  - enemies:
+    - {fileID: 6607168211614404231, guid: 474281716991f984c88c4763bb450287, type: 3}
+    powerups:
+    - {fileID: 1052661056700470647, guid: 279b820430ead1541bb290c3f79b7fcb, type: 3}
+  - enemies: []
+    powerups:
+    - {fileID: 534679620534909630, guid: 618c3d1075a458d41a1481ccfb513abb, type: 3}
+  - enemies: []
+    powerups:
+    - {fileID: 8474458394586556007, guid: 68a2795263a1c0a46a87625545df344d, type: 3}
 --- !u!4 &420405947
 Transform:
   m_ObjectHideFlags: 0
@@ -302,6 +309,90 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 420405947}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1345821221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1345821223}
+  - component: {fileID: 1345821222}
+  m_Layer: 0
+  m_Name: Activated_Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &1345821222
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345821221}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: -1395376391
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 333b0196b7a764df5a7768ead9b69dbc, type: 3}
+  m_Color: {r: 0.46941975, g: 0.51386714, b: 0.7169812, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 5.12, y: 5.12}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1345821223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1345821221}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1952937007}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1423297599
@@ -495,10 +586,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1952937004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.96, z: 0}
+  m_LocalPosition: {x: 0, y: -2.81, z: 0}
   m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1345821223}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -515,13 +607,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 5
+  _boostedSpeed: 11
   _xRightLimit: 9.7
   _xLeftLimit: -9.7
   _yUpperLimit: -1.1
   _yLowerLimit: -3.75
   _laserPrefab: {fileID: 5821632241810429330, guid: 4e5a0bb74a1979549a37dde2a90f9561, type: 3}
-  _yLaserPosition: 1.13
+  _tripleShotPrefab: {fileID: 5645512310944857386, guid: c77e49432e2e24f49912b7c7a7324081, type: 3}
+  _yLaserPosition: 1.3
   _reloadTime: 1.5
+  _playerShield: {fileID: 1345821221}
 --- !u!70 &1952937009
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

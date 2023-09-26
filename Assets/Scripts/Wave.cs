@@ -5,5 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class Wave
 {
-    public int enemyAmount;
+    public GameObject[] enemies;
+
+    public GameObject[] powerups;
 }
+
+

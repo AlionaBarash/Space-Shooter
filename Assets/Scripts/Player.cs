@@ -7,20 +7,30 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     private float _speed;
     [SerializeField]
+    private float _boostedSpeed;
+    [SerializeField]
     private float _xRightLimit, _xLeftLimit;
     [SerializeField]
     private float _yUpperLimit, _yLowerLimit;
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
+    private GameObject _tripleShotPrefab;
+    [SerializeField]
     private float _yLaserPosition;
     [SerializeField]
     private float _reloadTime;
+    [SerializeField]
+    private GameObject _playerShield;
 
     private Rigidbody2D _rigidbody;
     private Vector2 _input;
     private float _canFire;
     private int _health = 3;
+    private bool _isSpeedBoostActive;
+    private bool _isTripleShotActive;
+    private float _speedBoostDuration = 5f;
+    private float _tripleShotBoostDuration = 5f;
 
     void Awake()
     {
@@ -29,23 +39,48 @@ public class Player : MonoBehaviour, IDamageable
 
     void Update()
     {
-        _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")) * _speed;
+        _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         LimitPlayerMovement();
 
         _canFire -= Time.deltaTime;
 
+        if (_isTripleShotActive) 
+        {
+            _tripleShotBoostDuration -= Time.deltaTime;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && _canFire <= 0)
         {
             Shoot();
 
-            _canFire = _reloadTime;
+            if (!_isTripleShotActive)
+            {
+                _canFire = _reloadTime;
+            }
         }
     }
 
     void FixedUpdate()
     {
-        _rigidbody.MovePosition(_rigidbody.position + _input * Time.fixedDeltaTime);
+        if (_isSpeedBoostActive)
+        {
+            if (_speedBoostDuration > 0)
+            {
+                _rigidbody.MovePosition(_rigidbody.position + _input * _boostedSpeed * Time.fixedDeltaTime);
+
+                _speedBoostDuration -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                _speedBoostDuration = ResetBoostDurationValue();
+                _isSpeedBoostActive = false;
+            }
+        }
+        else
+        {
+            _rigidbody.MovePosition(_rigidbody.position + _input * _speed * Time.fixedDeltaTime);
+        }    
     }
 
     private void LimitPlayerMovement()
@@ -66,11 +101,31 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void ActivateTripleShot()
+    {
+        _isTripleShotActive = true;
+    }
+
     public void Shoot()
     {
-        Instantiate(_laserPrefab, 
-            new Vector3(transform.position.x, transform.position.y + _yLaserPosition, 0), 
-            Quaternion.identity);
+        if (_isTripleShotActive)
+        {
+            if (_tripleShotBoostDuration > 0)
+            {
+                Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+            }
+            else
+            {
+                _isTripleShotActive = false;
+                _tripleShotBoostDuration = ResetBoostDurationValue();
+            }
+        }
+        else
+        {
+            Instantiate(_laserPrefab,
+                new Vector3(transform.position.x, transform.position.y + _yLaserPosition, 0),
+                Quaternion.identity);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -84,13 +139,37 @@ public class Player : MonoBehaviour, IDamageable
         }
     }
 
+    public void ActivateSpeedBoost()
+    {
+        _isSpeedBoostActive = true;
+    }
+
+    private float ResetBoostDurationValue()
+    {
+        return 5;
+    }
+
+    public void ActivateShield()
+    {
+        _playerShield.SetActive(true);
+    }
+
     public void Damage()
     {
-        _health--;
-
-        if (_health == 0)
+        if (!_playerShield.activeSelf)
         {
-            Destroy(this.gameObject);
+            _health--;
+
+            if (_health == 0)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        else
+        {
+            _playerShield.SetActive(false);
         }
     }
+
+    
 }
