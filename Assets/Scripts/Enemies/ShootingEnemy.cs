@@ -3,38 +3,16 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class ShootingEnemy : Enemy
 {
-    [SerializeField]
-    private float _speed;
     [SerializeField]
     private GameObject _enemyLaserPrefab;
     [SerializeField]
     private float _yEnemyLaserPosition;
 
-    private Rigidbody2D _rigidbody;
-
-    void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
-
     void Start()
     {
-        StartCoroutine(Shoot());
-    }
-
-    void Update()
-    {
-        if (transform.position.y <= -6.6f)
-        {
-            Destroy(this.gameObject);
-        }     
-    }
-
-    void FixedUpdate()
-    {
-        _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
+        StartCoroutine(Shoot());  
     }
 
     IEnumerator Shoot()
@@ -56,10 +34,5 @@ public class Enemy : MonoBehaviour, IDamageable
                 laser.AssignEnemyLaser();
             }
         }
-    }
-
-    public void Damage()
-    {
-        Destroy(this.gameObject);
     }
 }
