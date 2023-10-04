@@ -169,7 +169,5 @@ public class Player : MonoBehaviour, IDamageable
         {
             _playerShield.SetActive(false);
         }
-    }
-
-    
+    }  
 }

@@ -11,10 +11,14 @@ public class Enemy : MonoBehaviour, IDamageable
     private GameObject _explosionPrefab;
 
     private Rigidbody2D _rigidbody;
+    private Collider2D _collider;
 
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+
+        _collider = GetComponent<Collider2D>();
+        _collider.enabled = true;
     }
 
     void Update()
@@ -32,8 +36,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void Damage()
     {
-        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+
+        _rigidbody.constraints = RigidbodyConstraints2D.FreezePosition;
+
+        _collider.enabled = false;
 
         Destroy(this.gameObject, 1.5f);
+
+        Destroy(explosion, 2.5f);
     }
 }
