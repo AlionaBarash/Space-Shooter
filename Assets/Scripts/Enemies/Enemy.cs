@@ -7,9 +7,10 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private float _speed;
+    [SerializeField]
+    private GameObject _explosionPrefab;
 
     private Rigidbody2D _rigidbody;
-
 
     void Awake()
     {
@@ -31,6 +32,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void Damage()
     {
-        Destroy(this.gameObject);
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+
+        Destroy(this.gameObject, 1.5f);
     }
 }
