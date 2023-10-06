@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private Rigidbody2D _rigidbody;
     private Collider2D _collider;
 
-    void Awake()
+    protected virtual void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
 
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (transform.position.y <= -6.6f)
         {
             Destroy(this.gameObject);
-        }     
+        }
     }
 
     void FixedUpdate()
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour, IDamageable
         _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
     }
 
-    public void Damage()
+    public virtual void Damage()
     {
         GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
 
