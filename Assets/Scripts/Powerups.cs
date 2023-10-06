@@ -37,21 +37,11 @@ public class Powerups : MonoBehaviour
         {
             switch (_powerupID)
             {
-                case 1:
-                    {
-                        player.ActivateShield();
-                    }
-                    break;
-                case 2:
-                    {
-                        player.ActivateSpeedBoost();
-                    }
-                    break;
-                case 3:
-                    {
-                        player.ActivateTripleShot();
-                    }
-                    break;
+                case 1: player.ActivateShield(); break;
+
+                case 2: player.ActivateSpeedBoost(); break;
+
+                case 3: player.ActivateTripleShot(); break;
             }
 
             Destroy(this.gameObject);
