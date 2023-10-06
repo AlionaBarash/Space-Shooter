@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : Movement, IDamageable
 {
-    [SerializeField]
-    private float _speed;
     [SerializeField]
     private float _boostedSpeed;
     [SerializeField]
@@ -23,7 +21,6 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField]
     private GameObject _playerShield;
 
-    private Rigidbody2D _rigidbody;
     private Vector2 _input;
     private float _canFire;
     [SerializeField]
@@ -32,11 +29,6 @@ public class Player : MonoBehaviour, IDamageable
     private bool _isTripleShotActive;
     private float _speedBoostDuration = 5f;
     private float _tripleShotBoostDuration = 5f;
-
-    void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
 
     void Update()
     {
@@ -68,7 +60,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             if (_speedBoostDuration > 0)
             {
-                _rigidbody.MovePosition(_rigidbody.position + _input * _boostedSpeed * Time.fixedDeltaTime);
+                MoveWithSpeedBoost();
 
                 _speedBoostDuration -= Time.fixedDeltaTime;
             }
@@ -80,8 +72,18 @@ public class Player : MonoBehaviour, IDamageable
         }
         else
         {
-            _rigidbody.MovePosition(_rigidbody.position + _input * _speed * Time.fixedDeltaTime);
+            Move();
         }    
+    }
+
+    protected override void Move()
+    {
+        _rigidbody.MovePosition(_rigidbody.position + _input * _speed * Time.fixedDeltaTime);
+    }
+
+    void MoveWithSpeedBoost()
+    {
+        _rigidbody.MovePosition(_rigidbody.position + _input * _boostedSpeed * Time.fixedDeltaTime);
     }
 
     private void LimitPlayerMovement()

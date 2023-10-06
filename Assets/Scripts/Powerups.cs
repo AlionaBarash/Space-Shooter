@@ -3,29 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Powerups : MonoBehaviour
+public class Powerups : Movement
 {
-    [SerializeField]
-    private float _speed = 4;
     [SerializeField]
     private int _powerupID;
 
-    private Rigidbody2D _rigidbody;
-
-    void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
-
     void Update()
     {
-        if (transform.position.y <= -6.6f)
-        {
-            Destroy(this.gameObject);
-        }
+        base.DestroyAfterPassingLimits();
     }
 
     void FixedUpdate()
+    {
+        Move();
+    }
+
+    protected override void Move()
     {
         _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
     }

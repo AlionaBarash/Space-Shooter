@@ -3,36 +3,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser : Movement
 {
-    [SerializeField]
-    private float _speed;
     [SerializeField]
     private GameObject _enemyLaser;
 
-    private Rigidbody2D _rigidbody;
     private bool _isEnemyShooting;
     private bool _ignoreShooter = true;
 
-    void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
-
     void Update()
     {
-        if (transform.position.y >= 6.6f || transform.position.y <= -6.6f)
-        {
-            DestroyLaser();
-
-            if (this.transform.parent != null)
-            {
-                Destroy(this.transform.parent.gameObject);
-            }
-        }
+        DestroyAfterPassingLimits();
     }
 
     void FixedUpdate()
+    {
+        Move();
+    }
+
+    protected override void Move()
     {
         if (_isEnemyShooting)
         {
@@ -46,7 +35,20 @@ public class Laser : MonoBehaviour
 
     void DestroyLaser()
     {
-        Destroy(this.gameObject); 
+        Destroy(this.gameObject);
+    }
+
+    protected override void DestroyAfterPassingLimits()
+    {
+        if (transform.position.y >= 6.6f || transform.position.y <= -6.6f)
+        {
+            DestroyLaser();
+
+            if (this.transform.parent != null)
+            {
+                Destroy(this.transform.parent.gameObject);
+            }
+        }
     }
 
     public void AssignEnemyLaser()

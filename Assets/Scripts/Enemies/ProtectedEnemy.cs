@@ -7,9 +7,9 @@ public class ProtectedEnemy : Enemy
     private Animator _animator;
     private int _health = 2;
 
-    protected override void Awake()
+    protected override void OnEnable()
     {
-        base.Awake();
+        base.OnEnable();
         _animator = GetComponent<Animator>();
     }
 
