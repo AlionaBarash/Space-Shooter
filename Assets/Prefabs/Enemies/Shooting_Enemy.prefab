@@ -146,8 +146,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.013861582, y: 0.07623866}
-  m_Size: {x: 2.3754313, y: 3.1932578}
+  m_Offset: {x: -0.013861358, y: 0.14111325}
+  m_Size: {x: 2.6868324, y: 3.4268079}
   m_Direction: 0
 --- !u!114 &5465076818675633077
 MonoBehaviour:
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120543f79eef576489afd4aaf79f51ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 2
+  _speed: 4
   _explosionPrefab: {fileID: 2527495694692068747, guid: 52ceb08582738034e8be8754ccde1031, type: 3}
   _enemyLaserPrefab: {fileID: 8090296054398346150, guid: bfaa7315e17d220448b40a7566d3c838, type: 3}
   _yEnemyLaserPosition: -0.79

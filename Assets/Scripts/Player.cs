@@ -26,6 +26,7 @@ public class Player : MonoBehaviour, IDamageable
     private Rigidbody2D _rigidbody;
     private Vector2 _input;
     private float _canFire;
+    [SerializeField]
     private int _health = 3;
     private bool _isSpeedBoostActive;
     private bool _isTripleShotActive;

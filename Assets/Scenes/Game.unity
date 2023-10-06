@@ -156,25 +156,15 @@ MonoBehaviour:
   _delayTime: 3
   _ySpawnPosition: 6.7
   _xSpawnPositions:
-  - -7.7
-  - -3.85
+  - -7.6
+  - -3.8
   - 0
-  - 3.85
-  - 7.7
+  - 3.8
+  - 7.6
   _waves:
   - enemies:
-    - {fileID: 6607168211614404231, guid: 474281716991f984c88c4763bb450287, type: 3}
-    powerups:
-    - {fileID: 1052661056700470647, guid: 279b820430ead1541bb290c3f79b7fcb, type: 3}
-  - enemies:
     - {fileID: 186865502323902315, guid: 97128cc9d859ac048aa261e1e5e0c252, type: 3}
-    powerups:
-    - {fileID: 8474458394586556007, guid: 68a2795263a1c0a46a87625545df344d, type: 3}
-  - enemies:
-    - {fileID: 186865502323902315, guid: 97128cc9d859ac048aa261e1e5e0c252, type: 3}
-    - {fileID: 6607168211614404231, guid: 474281716991f984c88c4763bb450287, type: 3}
-    powerups:
-    - {fileID: 534679620534909630, guid: 618c3d1075a458d41a1481ccfb513abb, type: 3}
+    powerups: []
 --- !u!4 &420405947
 Transform:
   m_ObjectHideFlags: 0
