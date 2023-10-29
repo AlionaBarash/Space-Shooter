@@ -1,34 +1,46 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : Movement, IDamageable
 {
+    [Header("Movement Limits")]
     [SerializeField]
-    private float _boostedSpeed;
-    [SerializeField]
-    private float _xRightLimit, _xLeftLimit;
+    private float _xRightLimit;
     [SerializeField]
     private float _yUpperLimit, _yLowerLimit;
+
+    [Header("Laser")]
     [SerializeField]
     private GameObject _laserPrefab;
-    [SerializeField]
-    private GameObject _tripleShotPrefab;
     [SerializeField]
     private float _yLaserPosition;
     [SerializeField]
     private float _reloadTime;
+
+    [Header("Boosters")]
     [SerializeField]
-    private GameObject _playerShield;
+    private float _boostedSpeed;
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
+    [SerializeField]
+    private float _yTripleShotPosition;
+
+    private List<IPowerUp> _powerUps;
 
     private Vector2 _input;
-    private float _canFire;
-    [SerializeField]
     private int _health = 3;
-    private bool _isSpeedBoostActive;
-    private bool _isTripleShotActive;
-    private float _speedBoostDuration = 5f;
-    private float _tripleShotBoostDuration = 5f;
+    private float _canFire;
+    private bool _pauseReload;
+
+    public static Action onBoostDeactivation;
+
+    void Start()
+    {
+        _powerUps = new List<IPowerUp>();
+    }
 
     void Update()
     {
@@ -37,43 +49,29 @@ public class Player : Movement, IDamageable
         LimitPlayerMovement();
 
         _canFire -= Time.deltaTime;
-
-        if (_isTripleShotActive) 
-        {
-            _tripleShotBoostDuration -= Time.deltaTime;
-        }
-
         if (Input.GetKeyDown(KeyCode.Space) && _canFire <= 0)
         {
             Shoot();
 
-            if (!_isTripleShotActive)
+            if (!_pauseReload)
             {
                 _canFire = _reloadTime;
             }
         }
+
+        StopBoosterImpact();
     }
 
     void FixedUpdate()
     {
-        if (_isSpeedBoostActive)
+        if (BoosterImpact<SpeedBoost>())
         {
-            if (_speedBoostDuration > 0)
-            {
-                MoveWithSpeedBoost();
-
-                _speedBoostDuration -= Time.fixedDeltaTime;
-            }
-            else
-            {
-                _speedBoostDuration = ResetBoostDurationValue();
-                _isSpeedBoostActive = false;
-            }
+            MoveWithSpeedBoost();
         }
         else
         {
             Move();
-        }    
+        }
     }
 
     protected override void Move()
@@ -90,9 +88,9 @@ public class Player : Movement, IDamageable
     {
         if (transform.position.x > _xRightLimit)
         {
-            transform.position = new Vector2(_xLeftLimit, transform.position.y);
+            transform.position = new Vector2(-_xRightLimit, transform.position.y);
         }
-        else if (transform.position.x < _xLeftLimit)
+        else if (transform.position.x < -_xRightLimit)
         {
             transform.position = new Vector2(_xRightLimit, transform.position.y);
         }
@@ -104,30 +102,40 @@ public class Player : Movement, IDamageable
         }
     }
 
-    public void ActivateTripleShot()
-    {
-        _isTripleShotActive = true;
-    }
-
     public void Shoot()
     {
-        if (_isTripleShotActive)
+        if (BoosterImpact<TripleShotBoost>())
         {
-            if (_tripleShotBoostDuration > 0)
-            {
-                Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-            }
-            else
-            {
-                _isTripleShotActive = false;
-                _tripleShotBoostDuration = ResetBoostDurationValue();
-            }
+            Instantiate(_tripleShotPrefab, 
+                new Vector3(transform.position.x, transform.position.y + _yTripleShotPosition, 0), 
+                Quaternion.identity);
+
+            _pauseReload = true;
         }
         else
         {
             Instantiate(_laserPrefab,
                 new Vector3(transform.position.x, transform.position.y + _yLaserPosition, 0),
                 Quaternion.identity);
+
+            _pauseReload = false;
+        }
+    }
+
+    public void Damage()
+    {
+        if (BoosterImpact<ShieldBoost>())
+        {
+            onBoostDeactivation?.Invoke();        
+        }
+        else
+        {
+            _health--;
+
+            if (_health == 0)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -140,37 +148,43 @@ public class Player : Movement, IDamageable
 
             Damage();
         }
-    }
 
-    public void ActivateSpeedBoost()
-    {
-        _isSpeedBoostActive = true;
-    }
-
-    private float ResetBoostDurationValue()
-    {
-        return 5;
-    }
-
-    public void ActivateShield()
-    {
-        _playerShield.SetActive(true);
-    }
-
-    public void Damage()
-    {
-        if (!_playerShield.activeSelf)
+        IPowerUp powerUp = other.GetComponent<IPowerUp>();
+        if (powerUp != null)
         {
-            _health--;
+            // ---> если добавлять проверку на дублирование, то по Name
 
-            if (_health == 0)
+            _powerUps.Add(powerUp);
+
+            powerUp.ActivateBoost();
+
+            powerUp.AfterCollectingBoost();
+        }
+    }
+
+    private bool BoosterImpact<T>() where T : IPowerUp
+    {
+        foreach (var booster in _powerUps)
+        {
+            if (booster.GetType() == typeof(T))
             {
-                Destroy(this.gameObject);
+                return true;
             }
         }
-        else
+
+        return false;
+    }
+
+    private void StopBoosterImpact()
+    {
+        foreach (var booster in _powerUps)
         {
-            _playerShield.SetActive(false);
+            if (!booster.IsBoostActive)
+            {
+                _powerUps.Remove(booster);
+
+                break;
+            }
         }
-    }  
+    }
 }
