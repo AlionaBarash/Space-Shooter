@@ -19,6 +19,8 @@ public class SpawnManager : MonoBehaviour
 
     private HashSet<float> _availableSpawnPositions;
 
+    private bool test = true;
+
     void Start()
     {
         _availableSpawnPositions = new HashSet<float>();
@@ -41,7 +43,7 @@ public class SpawnManager : MonoBehaviour
     IEnumerator SelectWave()
     {
         //will be condition
-        while (true)
+        while (test)
         {
             _availableSpawnPositions.AddRange(_xSpawnPositions);
 

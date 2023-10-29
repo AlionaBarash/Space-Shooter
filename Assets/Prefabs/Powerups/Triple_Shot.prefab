@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6737491140714768908}
   m_Layer: 0
-  m_Name: Activated_Triple_Shot
+  m_Name: Triple_Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   - {fileID: 8052821094489812300}
   - {fileID: 1493492244395393344}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4064915328746176933
 PrefabInstance:

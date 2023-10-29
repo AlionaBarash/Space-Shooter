@@ -8,7 +8,7 @@ public class ShootingEnemy : Enemy
     [SerializeField]
     private GameObject _enemyLaserPrefab;
     [SerializeField]
-    private float _yEnemyLaserPosition;
+    private float _yEnemyLaserPosition; //?
 
     void Start()
     {

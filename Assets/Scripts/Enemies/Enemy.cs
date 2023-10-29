@@ -3,33 +3,30 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IDamageable
+public class Enemy : Movement, IDamageable
 {
-    [SerializeField]
-    private float _speed;
     [SerializeField]
     private GameObject _explosionPrefab;
 
-    private Rigidbody2D _rigidbody;
     private Collider2D _collider;
 
-    protected virtual void Awake()
+    protected virtual void OnEnable()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
-
         _collider = GetComponent<Collider2D>();
         _collider.enabled = true;
     }
-
+    
     void Update()
     {
-        if (transform.position.y <= -6.6f)
-        {
-            Destroy(this.gameObject);
-        }
+        base.DestroyAfterPassingLimits();
     }
 
     void FixedUpdate()
+    {
+        Move();
+    }
+
+    protected override void Move()
     {
         _rigidbody.MovePosition(_rigidbody.position + Vector2.down * _speed * Time.fixedDeltaTime);
     }

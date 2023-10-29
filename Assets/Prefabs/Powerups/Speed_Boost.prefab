@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1000681346126647361}
   - component: {fileID: -329442611517923572}
   - component: {fileID: 235787556817118471}
-  - component: {fileID: -6685565488097177498}
+  - component: {fileID: 8245445114096783706}
   m_Layer: 0
   m_Name: Speed_Boost
   m_TagString: Untagged
@@ -149,7 +149,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.099288054, y: -0.04181739}
   m_Size: {x: 2.8789253, y: 4.5903044}
   m_Direction: 0
---- !u!114 &-6685565488097177498
+--- !u!114 &8245445114096783706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,8 +158,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 8474458394586556007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae88f87494454b048b9027aee91cf8ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 859898449d43b7c4e90b30b7c0e452e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _powerupID: 2
+  _durationTime: 5
