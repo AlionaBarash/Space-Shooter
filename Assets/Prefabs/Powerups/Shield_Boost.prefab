@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -9187067826820618271}
   - component: {fileID: 6741343909060399706}
   - component: {fileID: 3104904207451225144}
+  - component: {fileID: 766417139769691114}
   m_Layer: 0
   m_Name: Shield_Boost
   m_TagString: Untagged
@@ -173,3 +174,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   _playerShieldPrefab: {fileID: 6297584768358049812, guid: edc6f7d339a5ec9468e3b9b05c232dcd, type: 3}
+--- !u!95 &766417139769691114
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2319361191425325292}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 99954f46b3d115745bb7295dd953a1bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

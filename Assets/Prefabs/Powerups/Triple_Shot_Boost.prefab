@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -6754566104885872129}
   - component: {fileID: 8163342962153192709}
   - component: {fileID: -5147893495669367339}
+  - component: {fileID: 4842130541418318258}
   m_Layer: 0
   m_Name: Triple_Shot_Boost
   m_TagString: Untagged
@@ -173,3 +174,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   _durationTime: 5
+--- !u!95 &4842130541418318258
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534679620534909630}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e51ace5f52522ec4d9a02172e6604323, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
