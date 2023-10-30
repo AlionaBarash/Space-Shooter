@@ -36,6 +36,7 @@ public class Player : Movement, IDamageable
     private bool _pauseReload;
 
     public static Action onBoostDeactivation;
+    public static Action<int> onPlayerDamage;
 
     void Start()
     {
@@ -131,6 +132,8 @@ public class Player : Movement, IDamageable
         else
         {
             _health--;
+
+            onPlayerDamage?.Invoke(_health);
 
             if (_health == 0)
             {

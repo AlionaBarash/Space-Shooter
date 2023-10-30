@@ -17,7 +17,7 @@ public class ProtectedEnemy : Enemy
     {
         _health--;
 
-        _animator.SetInteger("FirstDamage", _health);
+        _animator.SetInteger("FirstDamage", _health); //StringToHash
 
         if (_health == 0)
         {
