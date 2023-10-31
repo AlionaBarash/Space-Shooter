@@ -13,8 +13,6 @@ public class ShootingEnemy : Enemy
     void Start()
     {
         StartCoroutine(Shoot());
-
-        Debug.Log(_isSelfDestroyedEnemy);
     }
 
     IEnumerator Shoot()

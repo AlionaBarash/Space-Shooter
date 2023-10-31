@@ -6,8 +6,6 @@ public class ExplodingEnemy : Enemy
 {
     void Start()
     {
-        _isSelfDestroyedEnemy = true;
-
         StartCoroutine(Explode());
     }
 
@@ -19,6 +17,8 @@ public class ExplodingEnemy : Enemy
 
         if (explodingEnemyID == 2) 
         {
+            _isSelfDestroyedEnemy = true;
+
             base.Damage();
         }
     }
