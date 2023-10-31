@@ -5,12 +5,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
     private Image _livesImage;
     [SerializeField]
     private Sprite[] _livesSprites;
+    [SerializeField]
+    private Image _gameOverWindow;
     [SerializeField]
     private TextMeshProUGUI _scoreText;
 
@@ -19,6 +22,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         Player.onPlayerDamage += UpdateLivesImage;
+        Player.onPlayerDeath += ShowGameOverWindow;
 
         Enemy.onEnemyDamage += UpdateScore;
 
@@ -37,9 +41,15 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + _score;
     }
 
+    private void ShowGameOverWindow()
+    {
+        _gameOverWindow.gameObject.SetActive(true);
+    }
+
     void OnDestroy()
     {
         Player.onPlayerDamage -= UpdateLivesImage;
+        Player.onPlayerDeath -= ShowGameOverWindow;
 
         Enemy.onEnemyDamage -= UpdateScore; 
     }

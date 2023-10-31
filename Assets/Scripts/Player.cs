@@ -37,6 +37,7 @@ public class Player : Movement, IDamageable
 
     public static Action onBoostDeactivation;
     public static Action<int> onPlayerDamage;
+    public static Action onPlayerDeath;
 
     void Start()
     {
@@ -137,6 +138,8 @@ public class Player : Movement, IDamageable
 
             if (_health == 0)
             {
+                onPlayerDeath?.Invoke();
+
                 Destroy(this.gameObject);
             }
         }
