@@ -38,7 +38,7 @@ public class Enemy : Movement, IDamageable
 
     public virtual void Damage()
     {
-        if (_isSelfDestroyedEnemy)
+        if (!_isSelfDestroyedEnemy)
         {
             onEnemyDamage?.Invoke();
         }

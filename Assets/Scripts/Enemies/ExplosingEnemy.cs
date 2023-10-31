@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class ExplodingEnemy : Enemy
 {
-    protected bool _isSelfDestoyed = true;
-
     void Start()
     {
+        _isSelfDestroyedEnemy = true;
+
         StartCoroutine(Explode());
     }
 
