@@ -7,9 +7,8 @@ public class ProtectedEnemy : Enemy
     private Animator _animator;
     private int _health = 2;
 
-    protected override void OnEnable()
+    void Start()
     {
-        base.OnEnable();
         _animator = GetComponent<Animator>();
     }
 
@@ -17,7 +16,7 @@ public class ProtectedEnemy : Enemy
     {
         _health--;
 
-        _animator.SetInteger("FirstDamage", _health); //StringToHash
+        _animator.SetInteger("FirstDamage", _health);
 
         if (_health == 0)
         {

@@ -15,7 +15,7 @@ public class Enemy : Movement, IDamageable
 
     public static Action onEnemyDamage;
 
-    protected virtual void OnEnable()
+    void OnEnable()
     {
         _collider = GetComponent<Collider2D>();
         _collider.enabled = true;

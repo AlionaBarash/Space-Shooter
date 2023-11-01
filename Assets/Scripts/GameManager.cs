@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-   public void RestartGame()
+    public static Action onPressingEscape;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            onPressingEscape?.Invoke();
+        }
+    }
+
+    public void RestartGame()
    {
         SceneManager.LoadScene(0);
    }

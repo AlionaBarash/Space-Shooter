@@ -15,16 +15,22 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Image _gameOverWindow;
     [SerializeField]
+    private Image _pauseWindow;
+    [SerializeField]
     private TextMeshProUGUI _scoreText;
 
     private int _score = 0;
 
     void Start()
     {
+        //юнити ивент или ивент?
+
         Player.onPlayerDamage += UpdateLivesImage;
         Player.onPlayerDeath += ShowGameOverWindow;
 
         Enemy.onEnemyDamage += UpdateScore;
+
+        GameManager.onPressingEscape += ShowPauseWindow;
 
         _scoreText.text = "Score: " + _score;
     }
@@ -43,7 +49,12 @@ public class UIManager : MonoBehaviour
 
     private void ShowGameOverWindow()
     {
-        _gameOverWindow.gameObject.SetActive(true);
+       _gameOverWindow.gameObject.SetActive(true);
+    }
+
+    private void ShowPauseWindow()
+    {
+        _pauseWindow.gameObject.SetActive(true);
     }
 
     void OnDestroy()
@@ -51,6 +62,8 @@ public class UIManager : MonoBehaviour
         Player.onPlayerDamage -= UpdateLivesImage;
         Player.onPlayerDeath -= ShowGameOverWindow;
 
-        Enemy.onEnemyDamage -= UpdateScore; 
+        Enemy.onEnemyDamage -= UpdateScore;
+
+        GameManager.onPressingEscape -= ShowPauseWindow;
     }
 }
