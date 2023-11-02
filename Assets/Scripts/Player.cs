@@ -46,6 +46,11 @@ public class Player : Movement, IDamageable
 
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         LimitPlayerMovement();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ public class UIManager : MonoBehaviour
 
     private int _score = 0;
 
+    public static Action<bool> onGamePause;
+
     void Start()
     {
-        //юнити ивент или ивент?
-
         Player.onPlayerDamage += UpdateLivesImage;
         Player.onPlayerDeath += ShowGameOverWindow;
 
@@ -54,7 +55,17 @@ public class UIManager : MonoBehaviour
 
     private void ShowPauseWindow()
     {
+        onGamePause?.Invoke(true);
+
         _pauseWindow.gameObject.SetActive(true);
+    }
+
+    public void ContinueGame()
+    {
+        onGamePause?.Invoke(false);
+
+        _pauseWindow.gameObject.SetActive(false);
+
     }
 
     void OnDestroy()
