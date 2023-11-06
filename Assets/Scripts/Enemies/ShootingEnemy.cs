@@ -12,7 +12,7 @@ public class ShootingEnemy : Enemy
 
     void Start()
     {
-        StartCoroutine(Shoot());  
+        StartCoroutine(Shoot());
     }
 
     IEnumerator Shoot()

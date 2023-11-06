@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,7 +11,11 @@ public class Enemy : Movement, IDamageable
 
     private Collider2D _collider;
 
-    protected virtual void OnEnable()
+    protected bool _isSelfDestroyedEnemy;
+
+    public static Action onEnemyDamage;
+
+    void OnEnable()
     {
         _collider = GetComponent<Collider2D>();
         _collider.enabled = true;
@@ -33,6 +38,11 @@ public class Enemy : Movement, IDamageable
 
     public virtual void Damage()
     {
+        if (!_isSelfDestroyedEnemy)
+        {
+            onEnemyDamage?.Invoke();
+        }
+
         GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
 
         _rigidbody.constraints = RigidbodyConstraints2D.FreezePosition;

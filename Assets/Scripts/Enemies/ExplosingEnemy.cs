@@ -17,6 +17,8 @@ public class ExplodingEnemy : Enemy
 
         if (explodingEnemyID == 2) 
         {
+            _isSelfDestroyedEnemy = true;
+
             base.Damage();
         }
     }

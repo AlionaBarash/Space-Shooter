@@ -36,6 +36,8 @@ public class Player : Movement, IDamageable
     private bool _pauseReload;
 
     public static Action onBoostDeactivation;
+    public static Action<int> onPlayerDamage;
+    public static Action onPlayerDeath;
 
     void Start()
     {
@@ -44,6 +46,11 @@ public class Player : Movement, IDamageable
 
     void Update()
     {
+        if (Time.timeScale == 0)
+        {
+            return;
+        }
+
         _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         LimitPlayerMovement();
@@ -132,8 +139,12 @@ public class Player : Movement, IDamageable
         {
             _health--;
 
+            onPlayerDamage?.Invoke(_health);
+
             if (_health == 0)
             {
+                onPlayerDeath?.Invoke();
+
                 Destroy(this.gameObject);
             }
         }
