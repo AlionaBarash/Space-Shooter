@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static Action onPressingEscape;
 
-    void OnEnable()
+    void Start()
     {
-        UIManager.onGamePause += SetPause;
+        PauseWindow_UI.onPauseGame += SetPause; 
     }
 
     void Update()
@@ -23,11 +23,15 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        SetPause(false);
+
         SceneManager.LoadScene(0);
     }
 
     public void GoToMainMenu()
     {
+        SetPause(false);
+
         SceneManager.LoadScene(1);
     }
 
@@ -36,8 +40,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = isEnable ? 0 : 1;
     }
 
-    void OnDisable()
+    void OnDestroy()
     {
-        UIManager.onGamePause -= SetPause;
+        PauseWindow_UI.onPauseGame -= SetPause;
     }
 }
