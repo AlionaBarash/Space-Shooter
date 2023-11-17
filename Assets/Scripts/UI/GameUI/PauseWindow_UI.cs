@@ -9,30 +9,25 @@ public class PauseWindow_UI : MonoBehaviour
     [SerializeField]
     private Image _pauseWindow;
 
-    public static Action<bool> onPauseGame;
-
-    void Start()
+    void Update()
     {
-        GameManager.onPressingEscape += ShowPauseWindow;
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowPauseWindow();
+        }
     }
 
     private void ShowPauseWindow()
     {
         _pauseWindow.gameObject.SetActive(true);
 
-        onPauseGame?.Invoke(true);
+        GameManager.instance.SetPause(true);
     }
 
     public void ContinueGame()
     {
         _pauseWindow.gameObject.SetActive(false);
 
-        onPauseGame?.Invoke(false);
+        GameManager.instance.SetPause(false);
     }
-
-    void OnDestroy()
-    {
-        GameManager.onPressingEscape -= ShowPauseWindow;
-    }
-
 }

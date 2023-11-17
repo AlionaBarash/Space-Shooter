@@ -6,18 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static Action onPressingEscape;
+    public static GameManager instance;
 
-    void Start()
+    void Awake()
     {
-        PauseWindow_UI.onPauseGame += SetPause; 
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (instance != null && instance != this)
         {
-            onPressingEscape?.Invoke();
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
         }
     }
 
@@ -25,14 +24,14 @@ public class GameManager : MonoBehaviour
     {
         SetPause(false);
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void GoToMainMenu()
     {
         SetPause(false);
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void SetPause(bool isEnable)
@@ -42,6 +41,9 @@ public class GameManager : MonoBehaviour
 
     void OnDestroy()
     {
-        PauseWindow_UI.onPauseGame -= SetPause;
+        if (instance == this)
+        {
+            instance = null;
+        }
     }
 }
