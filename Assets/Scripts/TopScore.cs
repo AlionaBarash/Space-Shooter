@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TopScore 
 {
-    public List<int> topScore = new List<int>(new int[3]);
+    static public List<int> topScore = new List<int>(new int[3]);
 
     private int _tempScoreValue;
 

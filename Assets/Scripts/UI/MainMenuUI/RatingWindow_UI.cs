@@ -23,4 +23,9 @@ public class RatingWindow_UI : MonoBehaviour
     {
         _ratingWindow.gameObject.SetActive(true);
     }
+
+    public void HideRatingWindow() 
+    { 
+        _ratingWindow.gameObject.SetActive(false);
+    }
 }
