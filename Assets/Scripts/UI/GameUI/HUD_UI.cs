@@ -13,7 +13,7 @@ public class HUD_UI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _scoreText;
 
-    private int _score = 0;
+    public int _score { get; private set; } = 0;
 
     void Start()
     {
@@ -21,6 +21,8 @@ public class HUD_UI : MonoBehaviour
 
         Enemy.onEnemyDamage += UpdateScore;
         _scoreText.text = "SCORE: " + _score;
+
+        GameManager.onGameProcessEnd += GetFinalScore;
     }
 
     private void UpdateLivesImage(int playerHealth)
@@ -35,11 +37,18 @@ public class HUD_UI : MonoBehaviour
         _scoreText.text = "SCORE: " + _score;
     }
 
+    public int GetFinalScore()
+    {
+        return _score;
+    }
+
     void OnDestroy()
     {
         Player.onPlayerDamage -= UpdateLivesImage;
 
         Enemy.onEnemyDamage -= UpdateScore;
+
+        GameManager.onGameProcessEnd -= GetFinalScore;
     }
 
 }

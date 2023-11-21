@@ -113,8 +113,8 @@ public class Player : Movement, IDamageable
     {
         if (BoosterImpact<TripleShotBoost>())
         {
-            Instantiate(_tripleShotPrefab, 
-                new Vector3(transform.position.x, transform.position.y + _yTripleShotPosition, 0), 
+            Instantiate(_tripleShotPrefab,
+                new Vector3(transform.position.x, transform.position.y + _yTripleShotPosition, 0),
                 Quaternion.identity);
 
             _pauseReload = true;
@@ -133,13 +133,16 @@ public class Player : Movement, IDamageable
     {
         if (BoosterImpact<ShieldBoost>())
         {
-            onBoostDeactivation?.Invoke();        
+            onBoostDeactivation?.Invoke();
         }
         else
         {
             _health--;
 
-            onPlayerDamage?.Invoke(_health);
+            if (_health > 0)
+            {
+                onPlayerDamage?.Invoke(_health);
+            }
 
             if (_health == 0)
             {
