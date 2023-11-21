@@ -41,4 +41,12 @@ public class TopScore
             }
         }
     }
+
+    public void SaveTopScoreResults()
+    {
+        for (int i = 0; i < topScore.Count; i++)
+        {
+            PlayerPrefs.SetInt($"{i + 1} place", topScore[i]);
+        }
+    }
 }

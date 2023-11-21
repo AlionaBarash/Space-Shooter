@@ -32,10 +32,6 @@ public class GameManager : MonoBehaviour
         if (onGameProcessEnd != null)
             _topScore.AddToTopScore(onGameProcessEnd.Invoke());
 
-        Debug.Log("First place: " + _topScore.topScore[0]);
-        Debug.Log("Second place: " + _topScore.topScore[1]);
-        Debug.Log("Third place: " + _topScore.topScore[2]);
-
         SceneManager.LoadScene(1);
     }
 
@@ -46,9 +42,7 @@ public class GameManager : MonoBehaviour
         if (onGameProcessEnd != null)
             _topScore.AddToTopScore(onGameProcessEnd.Invoke());
 
-        Debug.Log("First place: " + _topScore.topScore[0]);
-        Debug.Log("Second place: " + _topScore.topScore[1]);
-        Debug.Log("Third place: " + _topScore.topScore[2]);
+        _topScore.SaveTopScoreResults();
 
         SceneManager.LoadScene(0);
     }
