@@ -1,14 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
-public class TopScore 
+public class ScoreCalculator
 {
-    static public List<int> topScore = new List<int>(new int[3]);
+    public static List<int> topScore = new List<int>();
 
     private int _tempScoreValue;
 
-    public void AddToTopScore(int score)
+
+    public void AddToTopScore(int score) 
     {
         if (score < topScore[^1])
         {
@@ -41,12 +45,9 @@ public class TopScore
             }
         }
     }
-
-    public void SaveTopScoreResults()
-    {
-        for (int i = 0; i < topScore.Count; i++)
-        {
-            PlayerPrefs.SetInt($"{i + 1} place", topScore[i]);
-        }
-    }
 }
+
+
+
+
+

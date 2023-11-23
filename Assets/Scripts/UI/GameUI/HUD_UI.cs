@@ -25,6 +25,15 @@ public class HUD_UI : MonoBehaviour
         GameManager.onGameProcessEnd += GetFinalScore;
     }
 
+    void Update()
+    {
+        if (GameManager.instance._isGameEnded)
+        {
+            var _scoreCalculator = new ScoreCalculator();
+            _scoreCalculator.AddToTopScore(_score);
+        }
+    }
+
     private void UpdateLivesImage(int playerHealth)
     {
         _livesImage.sprite = _livesSprites[playerHealth];

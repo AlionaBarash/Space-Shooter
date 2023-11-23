@@ -7,11 +7,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private TopScore _topScore = new TopScore();
-
     public static GameManager instance;
 
     public static Func<int> onGameProcessEnd;
+
+    public bool _isGameEnded { get; private set; }
 
     void Awake()
     {
@@ -27,22 +27,16 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame() // before - save score
     {
+        _isGameEnded = true;
         SetPause(false);
-
-        if (onGameProcessEnd != null)
-            _topScore.AddToTopScore(onGameProcessEnd.Invoke());
 
         SceneManager.LoadScene(1);
     }
 
     public void GoToMainMenu() // before - save score
     {
+        _isGameEnded = true;
         SetPause(false);
-
-        if (onGameProcessEnd != null)
-            _topScore.AddToTopScore(onGameProcessEnd.Invoke());
-
-        _topScore.SaveTopScoreResults();
 
         SceneManager.LoadScene(0);
     }
