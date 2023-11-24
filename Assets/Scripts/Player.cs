@@ -127,6 +127,8 @@ public class Player : Movement, IDamageable
 
             _pauseReload = false;
         }
+
+        AudioManager.instance.PlaySfx(SoundName.LaserShot);
     }
 
     public void Damage()
@@ -166,6 +168,8 @@ public class Player : Movement, IDamageable
         IPowerUp powerUp = other.GetComponent<IPowerUp>();
         if (powerUp != null)
         {
+            AudioManager.instance.PlaySfx(SoundName.PowerUpActivation);
+
             // ---> если добавлять проверку на дублирование, то по Name
 
             _powerUps.Add(powerUp);

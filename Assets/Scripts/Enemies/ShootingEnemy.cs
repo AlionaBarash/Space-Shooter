@@ -27,6 +27,8 @@ public class ShootingEnemy : Enemy
                 new Vector3(transform.position.x, transform.position.y + _yEnemyLaserPosition, 0),
                 Quaternion.identity);
 
+            AudioManager.instance.PlaySfx(SoundName.LaserShot);
+
             var lasers = enemyLaser.GetComponentsInChildren<Laser>();
 
             foreach (var laser in lasers)
