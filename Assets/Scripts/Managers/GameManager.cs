@@ -17,12 +17,16 @@ public class GameManager : MonoBehaviour
     {
         if (instance != null && instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         else
         {
             instance = this;
         }
+    }
+    void Start()
+    {
+        AudioManager.instance.PlayMusic(SoundName.GameTheme);
     }
 
     public void RestartGame() // before - save score
@@ -44,13 +48,5 @@ public class GameManager : MonoBehaviour
     public void SetPause(bool isEnable)
     {
         Time.timeScale = isEnable ? 0 : 1;
-    }
-
-    void OnDestroy()
-    {
-        if (instance == this)
-        {
-            instance = null;
-        }
     }
 }

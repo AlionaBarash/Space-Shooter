@@ -7,6 +7,11 @@ using UnityEngine.UI;
 
 public class MainMenu_UI : MonoBehaviour
 {
+    void Start()
+    {
+        AudioManager.instance.PlayMusic(SoundName.MainMenuTheme);
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(1);
@@ -16,5 +21,4 @@ public class MainMenu_UI : MonoBehaviour
     {
         Application.Quit();
     }
-
 }
