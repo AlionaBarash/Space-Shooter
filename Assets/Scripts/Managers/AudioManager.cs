@@ -9,7 +9,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private Sound[] _musicThemes, _sfx;
     [SerializeField]
-    private AudioSource _musicAudioSource, _sfxAudioSource;
+    private Mute _isMuted;
+    
+    public AudioSource musicAudioSource, sfxAudioSource;
 
     public static AudioManager instance;
 
@@ -26,15 +28,16 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
     }
-
+ 
     public void PlayMusic(SoundName name)
     {
         Sound musicTheme = Array.Find(_musicThemes, n => n.soundName == name);
         
         if (musicTheme != null)
         {
-            _musicAudioSource.clip = musicTheme.audioClip;
-            _musicAudioSource.Play();
+            musicAudioSource.clip = musicTheme.audioClip;
+            musicAudioSource.Play();
+            musicAudioSource.mute = _isMuted.mute;
         }
     }
 
@@ -44,7 +47,14 @@ public class AudioManager : MonoBehaviour
 
         if (sfx != null)
         {
-            _sfxAudioSource.PlayOneShot(sfx.audioClip);
+            sfxAudioSource.PlayOneShot(sfx.audioClip);
         }
+    }
+
+    public void ToggleMusic()
+    {
+        musicAudioSource.mute = !musicAudioSource.mute;
+
+        _isMuted.mute = musicAudioSource.mute;
     }
 }
