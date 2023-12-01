@@ -169,7 +169,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1033,7 +1033,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 20}
   m_AnchorMin: {x: 0.5, y: 0.89855343}
   m_AnchorMax: {x: 0.5, y: 0.89855343}
-  m_AnchoredPosition: {x: -39, y: 5.375}
+  m_AnchoredPosition: {x: -39, y: 0}
   m_SizeDelta: {x: 100, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &677021656
@@ -1696,9 +1696,8 @@ MonoBehaviour:
     audioClip: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
   - soundName: 1
     audioClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
-  _isMuted: {fileID: 11400000, guid: 225b6c5e8b4c90547a716370cfb192db, type: 2}
-  musicAudioSource: {fileID: 42498802}
-  sfxAudioSource: {fileID: 1555608196}
+  _musicAudioSource: {fileID: 42498802}
+  _sfxAudioSource: {fileID: 1555608196}
 --- !u!1 &979074525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,7 +1733,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 10, y: -0.5, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.9431068}
   m_AnchorMax: {x: 0.5, y: 0.9431068}
-  m_AnchoredPosition: {x: 110, y: -13.125}
+  m_AnchoredPosition: {x: 110, y: 0}
   m_SizeDelta: {x: 348.4681, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &979074527
@@ -2791,7 +2790,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -3132,10 +3131,6 @@ MonoBehaviour:
   - {fileID: 1529121350}
   - {fileID: 1005075745}
   - {fileID: 1587277015}
-  _savedTopPlacesValues:
-  - {fileID: 11400000, guid: 52846b84df8ec3f40a7a1a06a36494de, type: 2}
-  - {fileID: 11400000, guid: 3845df486406a094a871102c2236c83c, type: 2}
-  - {fileID: 11400000, guid: 9d945f6cbe9dd2044afe2da4ca95807a, type: 2}
 --- !u!1 &1874190467
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,10 +3168,10 @@ RectTransform:
   m_Father: {fileID: 2143759405}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -25}
-  m_SizeDelta: {x: -531.1477, y: -66.0647}
+  m_SizeDelta: {x: 268.8523, y: 383.9353}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1874190469
 MonoBehaviour:
@@ -3640,6 +3635,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8354c4f45da90fa4f89410d2d5edc1e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _optionsButton: {fileID: 146129012}
 --- !u!1 &2144693157
 GameObject:
   m_ObjectHideFlags: 0
@@ -3837,7 +3833,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _optionsWindow: {fileID: 8541471101385722442, guid: c837227390e9f9d4f888f654c2b37371, type: 3}
-  _musicVolumeIcons:
-  - {fileID: 21300000, guid: 5637ffdc83ec46248bd487320bc9a958, type: 3}
+  _musicMuteIcons:
   - {fileID: 21300000, guid: 67b718a02958a4749a589c4f85d53c65, type: 3}
-  _currentIcon: {fileID: 11400000, guid: 8f6343f809caa65408df353b28b183a8, type: 2}
+  - {fileID: 21300000, guid: 5637ffdc83ec46248bd487320bc9a958, type: 3}
+  _sfxMuteIcons:
+  - {fileID: 21300000, guid: 9d880d25f759f354f900a69b38e1341b, type: 3}
+  - {fileID: 21300000, guid: 549ec85432838ca4cb8b1945264ae372, type: 3}

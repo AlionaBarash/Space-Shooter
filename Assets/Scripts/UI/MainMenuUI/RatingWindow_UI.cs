@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,21 +13,19 @@ public class RatingWindow_UI : MonoBehaviour
     private Image _ratingWindow;
     [SerializeField]
     private TextMeshProUGUI[] _topPlaces;
-    [SerializeField]
-    private RatingNumber[] _savedTopPlacesValues;
 
-    static private bool _isGameStart = true;
+    private int _topPlacesCount = 3;
 
     void Start()
     {
-        if (_isGameStart)
-        {
-            for (int i = 0; i < _savedTopPlacesValues.Length; i++)
-            {
-                ScoreCalculator.topScore.Add(_savedTopPlacesValues[i].ratingScoreValue);
-            }
+        InitializeScoreSaveProcess();
 
-            _isGameStart = false;
+        if (MainMenu_UI._isGameStart)
+        {
+            for (int i = 1; i <= _topPlacesCount; i++)
+            {
+                ScoreCalculator.topScore.Add(PlayerPrefs.GetInt($"{i} place"));
+            }
         }
         else
         {
@@ -36,11 +35,22 @@ public class RatingWindow_UI : MonoBehaviour
         UpdateRatingUI();
     }
 
+    private void InitializeScoreSaveProcess()
+    {
+        for (int i = 1; i <= _topPlacesCount; i++)
+        {
+            if (!PlayerPrefs.HasKey($"{i} place"))
+            {
+                PlayerPrefs.SetInt($"{i} place", 0);
+            }
+        }
+    }
+
     private void UpdateTopPlacesValues()
     {
-        for (int i = 0; i < _savedTopPlacesValues.Length; i++)
+        for (int i = 1, j = 0; i <= _topPlacesCount; i++, j++)
         {
-            _savedTopPlacesValues[i].ratingScoreValue = ScoreCalculator.topScore[i];
+            PlayerPrefs.SetInt($"{i} place", ScoreCalculator.topScore[j]);
         }
     }
 
@@ -48,7 +58,7 @@ public class RatingWindow_UI : MonoBehaviour
     {
         for (int i = 0; i < _topPlaces.Length; i++)
         {
-            _topPlaces[i].text = $"{_savedTopPlacesValues[i].ratingScoreValue}";
+            _topPlaces[i].text = $"{ScoreCalculator.topScore[i]}";
         }
     }
 

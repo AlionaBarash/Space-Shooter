@@ -9,9 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private Sound[] _musicThemes, _sfx;
     [SerializeField]
-    private Mute _isMuted;
-    
-    public AudioSource musicAudioSource, sfxAudioSource;
+    private AudioSource _musicAudioSource, _sfxAudioSource;
 
     public static AudioManager instance;
 
@@ -28,16 +26,24 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
     }
- 
+    void Start()
+    {
+        InitializeSoundDataSaveProcess();
+
+        _sfxAudioSource.mute = (PlayerPrefs.GetInt("isSfxMuted") != 0);
+    }
+
     public void PlayMusic(SoundName name)
     {
         Sound musicTheme = Array.Find(_musicThemes, n => n.soundName == name);
-        
+
         if (musicTheme != null)
         {
-            musicAudioSource.clip = musicTheme.audioClip;
-            musicAudioSource.Play();
-            musicAudioSource.mute = _isMuted.mute;
+            _musicAudioSource.clip = musicTheme.audioClip;
+            _musicAudioSource.Play();
+
+            _musicAudioSource.mute = (PlayerPrefs.GetInt("isMusicMuted") != 0);
+            _musicAudioSource.volume = PlayerPrefs.GetFloat("MusicVolume");
         }
     }
 
@@ -45,16 +51,49 @@ public class AudioManager : MonoBehaviour
     {
         Sound sfx = Array.Find(_sfx, n => n.soundName == name);
 
-        if (sfx != null)
-        {
-            sfxAudioSource.PlayOneShot(sfx.audioClip);
-        }
+        _sfxAudioSource.PlayOneShot(sfx?.audioClip);
+
+        _sfxAudioSource.volume = PlayerPrefs.GetFloat("SfxVolume");
     }
 
     public void ToggleMusic()
     {
-        musicAudioSource.mute = !musicAudioSource.mute;
+        _musicAudioSource.mute = !_musicAudioSource.mute;
 
-        _isMuted.mute = musicAudioSource.mute;
+        PlayerPrefs.SetInt("isMusicMuted", _musicAudioSource.mute ? 1 : 0);
+    }
+
+    public void ToggleSfx()
+    {
+        _sfxAudioSource.mute = !_sfxAudioSource.mute;
+
+        PlayerPrefs.SetInt("isSfxMuted", _sfxAudioSource.mute ? 1 : 0);
+    }
+
+    public void MusicVolume(float volume)
+    {
+        _musicAudioSource.volume = volume;
+
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+    }
+
+    public void SfxVolume(float volume)
+    {
+       _sfxAudioSource.volume = volume;
+
+        PlayerPrefs.SetFloat("SfxVolume", volume);
+    }
+
+    private void InitializeSoundDataSaveProcess()
+    {
+        if (!PlayerPrefs.HasKey("MusicVolume"))
+        {
+            PlayerPrefs.SetFloat("MusicVolume", 1);
+        }
+
+        if (!PlayerPrefs.HasKey("SfxVolume"))
+        {
+            PlayerPrefs.SetFloat("SfxVolume", 1);
+        }
     }
 }

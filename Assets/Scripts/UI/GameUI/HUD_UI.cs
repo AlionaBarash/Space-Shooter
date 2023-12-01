@@ -12,6 +12,8 @@ public class HUD_UI : MonoBehaviour
     private Sprite[] _livesSprites;
     [SerializeField]
     private TextMeshProUGUI _scoreText;
+    [SerializeField]
+    private Button _optionsButton;
 
     public int _score { get; private set; } = 0;
 
@@ -23,6 +25,8 @@ public class HUD_UI : MonoBehaviour
         _scoreText.text = "SCORE: " + _score;
 
         GameManager.onGameProcessEnd += GetFinalScore;
+
+        _optionsButton.onClick.AddListener(OptionsWindow_UI.instance.ShowOptionsWindow);
     }
 
     void Update()

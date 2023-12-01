@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         AudioManager.instance.PlayMusic(SoundName.GameTheme);
     }
 
-    public void RestartGame() // before - save score
+    public void RestartGame() 
     {
         _isGameEnded = true;
         SetPause(false);
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
-    public void GoToMainMenu() // before - save score
+    public void GoToMainMenu() 
     {
         _isGameEnded = true;
         SetPause(false);
