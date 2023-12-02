@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionsWindow_UI : MonoBehaviour
@@ -11,6 +14,7 @@ public class OptionsWindow_UI : MonoBehaviour
     private Sprite[] _musicMuteIcons, _sfxMuteIcons;
 
     public static OptionsWindow_UI instance;
+    public static Action onResetScore;
 
     private GameObject _optionsWindowClone;
 
@@ -41,6 +45,7 @@ public class OptionsWindow_UI : MonoBehaviour
                 case 0: ExitButton(buttons, i); break;
                 case 1: MusicMuteButton(buttons, i); break;
                 case 2: SfxMuteButton(buttons, i); break;
+                case 3: ResetScoreButton(buttons, i); break;
             }
         }
 
@@ -87,6 +92,18 @@ public class OptionsWindow_UI : MonoBehaviour
         buttons[index].GetComponent<Image>().sprite = _sfxMuteIcons[PlayerPrefs.GetInt("isSfxMuted")];
         buttons[index].onClick.AddListener(AudioManager.instance.ToggleSfx);
         buttons[index].onClick.AddListener(() => buttons[index].GetComponent<Image>().sprite = ToggleSfxMuteIcon());
+    }
+
+    private void ResetScoreButton(Button[] buttons, int index)
+    {
+        if (onResetScore != null && SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(0))
+        {
+            buttons[index].onClick.AddListener(() => onResetScore());
+        }
+        else
+        {
+            buttons[index].enabled = false;
+        }
     }
 
     private void MusicVolumeSlider(Slider[] sliders, int index)

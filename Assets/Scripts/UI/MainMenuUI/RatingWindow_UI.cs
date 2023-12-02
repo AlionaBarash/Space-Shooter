@@ -16,9 +16,10 @@ public class RatingWindow_UI : MonoBehaviour
 
     private int _topPlacesCount = 3;
 
+
     void Start()
     {
-        InitializeScoreSaveProcess();
+        OptionsWindow_UI.onResetScore += ResetTopScore;
 
         if (MainMenu_UI._isGameStart)
         {
@@ -33,16 +34,25 @@ public class RatingWindow_UI : MonoBehaviour
         }
 
         UpdateRatingUI();
+    }   
+
+    public void ShowRatingWindow()
+    {
+        _ratingWindow.gameObject.SetActive(true);
     }
 
-    private void InitializeScoreSaveProcess()
+    public void HideRatingWindow()
     {
-        for (int i = 1; i <= _topPlacesCount; i++)
+        _ratingWindow.gameObject.SetActive(false);
+    }
+
+    public void ResetTopScore()
+    {
+        for (int i = 0; i < ScoreCalculator.topScore.Count; i++)
         {
-            if (!PlayerPrefs.HasKey($"{i} place"))
-            {
-                PlayerPrefs.SetInt($"{i} place", 0);
-            }
+            ScoreCalculator.topScore[i] = 0;
+            UpdateTopPlacesValues();
+            UpdateRatingUI();
         }
     }
 
@@ -62,13 +72,8 @@ public class RatingWindow_UI : MonoBehaviour
         }
     }
 
-    public void ShowRatingWindow()
+    void OnDestroy()
     {
-        _ratingWindow.gameObject.SetActive(true);
-    }
-
-    public void HideRatingWindow()
-    {
-        _ratingWindow.gameObject.SetActive(false);
+        OptionsWindow_UI.onResetScore -= ResetTopScore;
     }
 }
