@@ -26,7 +26,7 @@ public class HUD_UI : MonoBehaviour
 
         GameManager.onGameProcessEnd += GetFinalScore;
 
-        _optionsButton.onClick.AddListener(OptionsWindow_UI.instance.ShowOptionsWindow);
+        OnOptionsButtonClick();
     }
 
     void Update()
@@ -48,6 +48,12 @@ public class HUD_UI : MonoBehaviour
         _score += 10;
 
         _scoreText.text = "SCORE: " + _score;
+    }
+
+    private void OnOptionsButtonClick()
+    {
+        _optionsButton.onClick.AddListener(OptionsWindow_UI.instance.ShowOptionsWindow);
+        _optionsButton.onClick.AddListener(() => GameManager.instance.SetPause(true));
     }
 
     public int GetFinalScore()

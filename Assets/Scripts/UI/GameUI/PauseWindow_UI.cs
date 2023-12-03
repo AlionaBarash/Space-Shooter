@@ -17,7 +17,7 @@ public class PauseWindow_UI : MonoBehaviour
         }
     }
 
-    private void ShowPauseWindow()
+    public void ShowPauseWindow()
     {
         _pauseWindow.gameObject.SetActive(true);
 

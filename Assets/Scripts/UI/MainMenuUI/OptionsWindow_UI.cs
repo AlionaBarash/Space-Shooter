@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,12 +8,15 @@ public class OptionsWindow_UI : MonoBehaviour
     [SerializeField]
     private GameObject _optionsWindow;
     [SerializeField]
+    private GameObject _backgroundPanel;
+    [SerializeField]
     private Sprite[] _musicMuteIcons, _sfxMuteIcons;
 
     public static OptionsWindow_UI instance;
     public static Action onResetScore;
 
     private GameObject _optionsWindowClone;
+    private GameObject _backgroundPanelClone;
 
     void Awake()
     {
@@ -34,6 +34,12 @@ public class OptionsWindow_UI : MonoBehaviour
 
     public void ShowOptionsWindow()
     {
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            _backgroundPanelClone = Instantiate(_backgroundPanel);
+            _backgroundPanelClone.transform.SetParent(transform, false);
+        }
+
         _optionsWindowClone = Instantiate(_optionsWindow);
         _optionsWindowClone.transform.SetParent(transform, false);
 
@@ -63,6 +69,11 @@ public class OptionsWindow_UI : MonoBehaviour
     public void HideOptionsWindow()
     {
         Destroy(_optionsWindowClone);
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            Destroy(_backgroundPanelClone);
+        }
     }
 
     public Sprite ToggleMusicMuteIcon()
@@ -78,6 +89,11 @@ public class OptionsWindow_UI : MonoBehaviour
     private void ExitButton(Button[] buttons, int index)
     {
         buttons[index].onClick.AddListener(HideOptionsWindow);
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            buttons[index].onClick.AddListener(() => GameManager.instance.SetPause(false));
+        }
     }
 
     private void MusicMuteButton(Button[] buttons, int index)
