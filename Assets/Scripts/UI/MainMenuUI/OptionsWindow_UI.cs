@@ -14,6 +14,7 @@ public class OptionsWindow_UI : MonoBehaviour
 
     public static OptionsWindow_UI instance;
     public static Action onResetScore;
+    public static Action onOptionsWindowClose;
 
     private GameObject _optionsWindowClone;
     private GameObject _backgroundPanelClone;
@@ -70,7 +71,7 @@ public class OptionsWindow_UI : MonoBehaviour
     {
         Destroy(_optionsWindowClone);
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)) //
         {
             Destroy(_backgroundPanelClone);
         }
@@ -89,10 +90,14 @@ public class OptionsWindow_UI : MonoBehaviour
     private void ExitButton(Button[] buttons, int index)
     {
         buttons[index].onClick.AddListener(HideOptionsWindow);
-
+        
         if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
         {
             buttons[index].onClick.AddListener(() => GameManager.instance.SetPause(false));
+        }
+        else
+        {
+            buttons[index].onClick.AddListener(() => onOptionsWindowClose());
         }
     }
 

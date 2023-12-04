@@ -9,14 +9,6 @@ public class PauseWindow_UI : MonoBehaviour
     [SerializeField]
     private Image _pauseWindow;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ShowPauseWindow();
-        }
-    }
-
     public void ShowPauseWindow()
     {
         _pauseWindow.gameObject.SetActive(true);

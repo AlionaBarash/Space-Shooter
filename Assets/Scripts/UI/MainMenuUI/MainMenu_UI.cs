@@ -16,6 +16,8 @@ public class MainMenu_UI : MonoBehaviour
     {
         AudioManager.instance.PlayMusic(SoundName.MainMenuTheme);
 
+        OptionsWindow_UI.onOptionsWindowClose += OpenMainMenu;
+
         if (_isGameStart)
         {
             _isGameStart = false;
@@ -34,5 +36,15 @@ public class MainMenu_UI : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void OpenMainMenu()
+    {
+        gameObject.SetActive(true);
+    }
+
+    void OnDestroy()
+    {
+        OptionsWindow_UI.onOptionsWindowClose -= OpenMainMenu;
     }
 }
