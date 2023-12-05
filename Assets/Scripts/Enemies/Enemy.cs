@@ -45,6 +45,8 @@ public class Enemy : Movement, IDamageable
 
         GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
 
+        AudioManager.instance.PlaySfx(SoundName.Explosion);
+
         _rigidbody.constraints = RigidbodyConstraints2D.FreezePosition;
 
         _collider.enabled = false;

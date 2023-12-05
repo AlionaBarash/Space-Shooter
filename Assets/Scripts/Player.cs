@@ -113,8 +113,8 @@ public class Player : Movement, IDamageable
     {
         if (BoosterImpact<TripleShotBoost>())
         {
-            Instantiate(_tripleShotPrefab, 
-                new Vector3(transform.position.x, transform.position.y + _yTripleShotPosition, 0), 
+            Instantiate(_tripleShotPrefab,
+                new Vector3(transform.position.x, transform.position.y + _yTripleShotPosition, 0),
                 Quaternion.identity);
 
             _pauseReload = true;
@@ -127,19 +127,24 @@ public class Player : Movement, IDamageable
 
             _pauseReload = false;
         }
+
+        AudioManager.instance.PlaySfx(SoundName.LaserShot);
     }
 
     public void Damage()
     {
         if (BoosterImpact<ShieldBoost>())
         {
-            onBoostDeactivation?.Invoke();        
+            onBoostDeactivation?.Invoke();
         }
         else
         {
             _health--;
 
-            onPlayerDamage?.Invoke(_health);
+            if (_health > 0)
+            {
+                onPlayerDamage?.Invoke(_health);
+            }
 
             if (_health == 0)
             {
@@ -163,6 +168,8 @@ public class Player : Movement, IDamageable
         IPowerUp powerUp = other.GetComponent<IPowerUp>();
         if (powerUp != null)
         {
+            AudioManager.instance.PlaySfx(SoundName.PowerUpActivation);
+
             // ---> если добавлять проверку на дублирование, то по Name
 
             _powerUps.Add(powerUp);
