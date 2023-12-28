@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
             instance = this;
         }
     }
+
     void Start()
     {
         AudioManager.instance.PlayMusic(SoundName.GameTheme);

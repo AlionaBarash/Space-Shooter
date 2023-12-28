@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HUD_UI : MonoBehaviour
 {
@@ -13,9 +15,15 @@ public class HUD_UI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _scoreText;
     [SerializeField]
+    private RectTransform _buttonsPanel;
+    [SerializeField]
     private Button _optionsButton;
+    [SerializeField]
+    private float _buttonPanelUpValue;
 
     public int _score { get; private set; } = 0;
+
+    private bool _isButtonsPanelActive;
 
     void Start()
     {
@@ -59,6 +67,20 @@ public class HUD_UI : MonoBehaviour
     public int GetFinalScore()
     {
         return _score;
+    }
+
+    public void HandleButtonsPanel()
+    {
+        if (!_isButtonsPanelActive)
+        {
+            _buttonsPanel.DOAnchorPos(Vector2.up * _buttonPanelUpValue, 0.5f);
+            _isButtonsPanelActive = true;
+        }
+        else
+        {
+            _buttonsPanel.DOAnchorPos(Vector2.down, 0.5f);
+            _isButtonsPanelActive = false;
+        }
     }
 
     void OnDestroy()
