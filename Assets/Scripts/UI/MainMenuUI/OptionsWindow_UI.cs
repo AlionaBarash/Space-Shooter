@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,8 +9,6 @@ public class OptionsWindow_UI : MonoBehaviour
     [SerializeField]
     private GameObject _optionsWindow;
     [SerializeField]
-    private GameObject _backgroundPanel;
-    [SerializeField]
     private Sprite[] _musicMuteIcons, _sfxMuteIcons;
 
     public static OptionsWindow_UI instance;
@@ -17,7 +16,6 @@ public class OptionsWindow_UI : MonoBehaviour
     public static Action onOptionsWindowClose;
 
     private GameObject _optionsWindowClone;
-    private GameObject _backgroundPanelClone;
 
     void Awake()
     {
@@ -35,14 +33,14 @@ public class OptionsWindow_UI : MonoBehaviour
 
     public void ShowOptionsWindow()
     {
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
-        {
-            _backgroundPanelClone = Instantiate(_backgroundPanel);
-            _backgroundPanelClone.transform.SetParent(transform, false);
-        }
-
         _optionsWindowClone = Instantiate(_optionsWindow);
         _optionsWindowClone.transform.SetParent(transform, false);
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1))
+        {
+            var backgroundImage = _optionsWindowClone.transform.GetChild(0);
+            backgroundImage.gameObject.SetActive(true);
+        }
 
         var buttons = _optionsWindowClone.GetComponentsInChildren<Button>();
         for (int i = 0; i < buttons.Length; i++)
@@ -70,11 +68,6 @@ public class OptionsWindow_UI : MonoBehaviour
     public void HideOptionsWindow()
     {
         Destroy(_optionsWindowClone);
-
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1)) //
-        {
-            Destroy(_backgroundPanelClone);
-        }
     }
 
     public Sprite ToggleMusicMuteIcon()
@@ -123,7 +116,7 @@ public class OptionsWindow_UI : MonoBehaviour
         }
         else
         {
-            buttons[index].enabled = false;
+            buttons[index].gameObject.SetActive(false);
         }
     }
 
