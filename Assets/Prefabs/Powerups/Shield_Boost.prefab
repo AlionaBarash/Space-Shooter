@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c631bb0b0154d044b847904c38574c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
+  _speed: 3.5
   _playerShieldPrefab: {fileID: 6297584768358049812, guid: edc6f7d339a5ec9468e3b9b05c232dcd, type: 3}
 --- !u!95 &766417139769691114
 Animator:

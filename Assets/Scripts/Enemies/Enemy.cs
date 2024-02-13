@@ -11,7 +11,8 @@ public class Enemy : Movement, IDamageable
 
     private Collider2D _collider;
 
-    protected bool _isSelfDestroyedEnemy;
+    protected bool _isSelfDestroyed;
+    protected bool _isShooting;
 
     public static Action onEnemyDamage;
 
@@ -38,7 +39,7 @@ public class Enemy : Movement, IDamageable
 
     public virtual void Damage()
     {
-        if (!_isSelfDestroyedEnemy)
+        if (!_isSelfDestroyed)
         {
             onEnemyDamage?.Invoke();
         }
@@ -54,5 +55,11 @@ public class Enemy : Movement, IDamageable
         Destroy(this.gameObject, 1.5f);
 
         Destroy(explosion, 2.5f);
+    }
+
+    public void AssignEnemiesFeatures(bool isShooting, bool isExplosing)
+    {
+        _isShooting = isShooting;
+        _isSelfDestroyed = isExplosing;
     }
 }

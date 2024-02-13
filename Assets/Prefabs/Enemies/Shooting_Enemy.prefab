@@ -29,11 +29,11 @@ Transform:
   m_GameObject: {fileID: 6607168211614404231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &141127957840695143
 SpriteRenderer:
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120543f79eef576489afd4aaf79f51ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
+  _speed: 3
   _explosionPrefab: {fileID: 2527495694692068747, guid: 52ceb08582738034e8be8754ccde1031, type: 3}
   _enemyLaserPrefab: {fileID: 8090296054398346150, guid: bfaa7315e17d220448b40a7566d3c838, type: 3}
   _yEnemyLaserPosition: -0.79

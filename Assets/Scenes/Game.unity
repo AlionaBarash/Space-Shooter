@@ -336,7 +336,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.90000004}
   m_AnchorMax: {x: 0, y: 0.90000004}
   m_AnchoredPosition: {x: 87.5, y: 0}
-  m_SizeDelta: {x: 180, y: 90}
+  m_SizeDelta: {x: 170, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &193158478
 MonoBehaviour:
@@ -746,14 +746,10 @@ MonoBehaviour:
   - 0
   - 3.8
   - 7.6
-  _waves:
-  - enemies:
-    - {fileID: 6607168211614404231, guid: 474281716991f984c88c4763bb450287, type: 3}
-    powerups: []
-  - enemies:
-    - {fileID: 186865502323902315, guid: 97128cc9d859ac048aa261e1e5e0c252, type: 3}
-    powerups:
-    - {fileID: 2319361191425325292, guid: 279b820430ead1541bb290c3f79b7fcb, type: 3}
+  _waveDifficulties:
+  - {fileID: 11400000, guid: 0589e0d31e142594e9f3f006bce2ad13, type: 2}
+  - {fileID: 11400000, guid: c6319b467f5748c4c95bee38195204ad, type: 2}
+  - {fileID: 11400000, guid: 17be97b73b88e9f40baf3331184e570e, type: 2}
 --- !u!4 &420405947
 Transform:
   m_ObjectHideFlags: 0
@@ -1062,6 +1058,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 80fba5ece7697c44eacc036539c1b552, type: 3}
   - {fileID: 21300000, guid: 482c8e4c0346b704aa5f1760c3c989d5, type: 3}
   _scoreText: {fileID: 860194345}
+  _scoreLimits: 280000005000000096000000
   _buttonsPanel: {fileID: 1835919550}
   _optionsButton: {fileID: 2017860314}
   _buttonPanelUpValue: 77
@@ -1226,8 +1223,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 46
-  m_fontSizeBase: 46
+  m_fontSize: 44
+  m_fontSizeBase: 44
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1236,7 +1233,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: -8
+  m_characterSpacing: -5.5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -2361,7 +2358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.83, y: -0.09}
   m_AnchorMax: {x: 0.83, y: -0.09}
-  m_AnchoredPosition: {x: 3.5, y: -1}
+  m_AnchoredPosition: {x: 3.5, y: 0}
   m_SizeDelta: {x: 170.6404, y: 93.7899}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1835919551
@@ -2896,7 +2893,7 @@ Transform:
   m_GameObject: {fileID: 1952937004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.44, y: -2.98, z: 0}
-  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

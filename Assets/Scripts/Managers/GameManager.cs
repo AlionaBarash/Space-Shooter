@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public static Func<int> onGameProcessEnd;
 
-    public bool _isGameEnded { get; private set; }
+    public bool IsGameEnded { get; private set; }
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame() 
     {
-        _isGameEnded = true;
+        IsGameEnded = true;
         SetPause(false);
 
         SceneManager.LoadScene(1);
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToMainMenu() 
     {
-        _isGameEnded = true;
+        IsGameEnded = true;
         SetPause(false);
 
         SceneManager.LoadScene(0);

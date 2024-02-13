@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class HUD_UI : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class HUD_UI : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _scoreText;
     [SerializeField]
+    private int[] _scoreLimits;
+    [SerializeField]
     private RectTransform _buttonsPanel;
     [SerializeField]
     private Button _optionsButton;
@@ -22,11 +25,17 @@ public class HUD_UI : MonoBehaviour
     private float _buttonPanelUpValue;
 
     public int _score { get; private set; } = 0;
+    public static Action onWeightChange;
 
     private bool _isButtonsPanelActive;
+    private List<int> _availableScoreLimits = new List<int>();
+
+
 
     void Start()
     {
+        _availableScoreLimits.AddRange(_scoreLimits);
+
         Player.onPlayerDamage += UpdateLivesImage;
 
         Enemy.onEnemyDamage += UpdateScore;
@@ -39,7 +48,7 @@ public class HUD_UI : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance._isGameEnded)
+        if (GameManager.instance.IsGameEnded)
         {
             var _scoreCalculator = new ScoreCalculator();
             _scoreCalculator.AddToTopScore(_score);
@@ -56,6 +65,20 @@ public class HUD_UI : MonoBehaviour
         _score += 10;
 
         _scoreText.text = "SCORE: " + _score;
+
+        UpdateScoreLimits();
+    }
+
+    private void UpdateScoreLimits() 
+    {
+        for (int i = 0; i < _availableScoreLimits.Count; i++)
+        {
+            if (_score == _availableScoreLimits[i])
+            {
+                onWeightChange?.Invoke();
+                _availableScoreLimits.Remove(_availableScoreLimits[i]);
+            }
+        }
     }
 
     private void OnOptionsButtonClick()

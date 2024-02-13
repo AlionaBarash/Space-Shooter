@@ -8,33 +8,31 @@ public class ShootingEnemy : Enemy
     [SerializeField]
     private GameObject _enemyLaserPrefab;
     [SerializeField]
-    private float _yEnemyLaserPosition; //?
+    private float _yEnemyLaserPosition;
 
     void Start()
     {
-        StartCoroutine(Shoot());
+        if (_isShooting)
+        {
+            StartCoroutine(Shoot());
+        }
     }
 
     IEnumerator Shoot()
     {
         yield return new WaitForSeconds(Random.Range(0.5f, 1.7f));
 
-        int shootingEnemyID = Random.Range(1, 4);
+        GameObject enemyLaser = Instantiate(_enemyLaserPrefab,
+            new Vector3(transform.position.x, transform.position.y + _yEnemyLaserPosition, 0),
+            Quaternion.identity);
 
-        if (shootingEnemyID == 3)
+        AudioManager.instance.PlaySfx(SoundName.LaserShot);
+
+        var lasers = enemyLaser.GetComponentsInChildren<Laser>();
+
+        foreach (var laser in lasers)
         {
-            GameObject enemyLaser = Instantiate(_enemyLaserPrefab,
-                new Vector3(transform.position.x, transform.position.y + _yEnemyLaserPosition, 0),
-                Quaternion.identity);
-
-            AudioManager.instance.PlaySfx(SoundName.LaserShot);
-
-            var lasers = enemyLaser.GetComponentsInChildren<Laser>();
-
-            foreach (var laser in lasers)
-            {
-                laser.AssignEnemyLaser();
-            }
+            laser.AssignEnemyLaser();
         }
     }
 }

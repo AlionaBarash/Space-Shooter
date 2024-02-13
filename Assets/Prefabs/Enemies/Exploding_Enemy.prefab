@@ -29,11 +29,11 @@ Transform:
   m_GameObject: {fileID: 186865502323902315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.58, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0}
+  m_LocalScale: {x: 0.88, y: 0.88, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5524619594854248972
 SpriteRenderer:
@@ -171,5 +171,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68da1a3ffd517cc48a426dfd5ae07645, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 7
+  _speed: 4
   _explosionPrefab: {fileID: 2527495694692068747, guid: 52ceb08582738034e8be8754ccde1031, type: 3}

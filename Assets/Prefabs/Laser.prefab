@@ -161,5 +161,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49599e041210ba2459bdd2196dcf928e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 9
+  _speed: 11
   _enemyLaser: {fileID: 8090296054398346150, guid: bfaa7315e17d220448b40a7566d3c838, type: 3}

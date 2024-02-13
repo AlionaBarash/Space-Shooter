@@ -11,13 +11,9 @@ public class ExplodingEnemy : Enemy
 
     IEnumerator Explode()
     {
-        yield return new WaitForSeconds(Random.Range(1f, 1.3f));
-
-        int explodingEnemyID = Random.Range(1, 4);
-
-        if (explodingEnemyID == 2) 
+        if (_isSelfDestroyed)
         {
-            _isSelfDestroyedEnemy = true;
+            yield return new WaitForSeconds(Random.Range(1f, 1.3f));
 
             base.Damage();
         }
