@@ -6,16 +6,20 @@ public class ExplodingEnemy : Enemy
 {
     void Start()
     {
-        StartCoroutine(Explode());
+        if (_isSelfDestroyed)
+        {
+            StartCoroutine(Explode());
+        }
     }
 
     IEnumerator Explode()
     {
-        if (_isSelfDestroyed)
-        {
-            yield return new WaitForSeconds(Random.Range(1f, 1.3f));
+        _isSelfDestroyed = false;
 
-            base.Damage();
-        }
+        yield return new WaitForSeconds(Random.Range(2f, 2.2f));
+
+        _isSelfDestroyed = true;
+
+        base.Damage();
     }
 }

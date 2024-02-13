@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class Laser : Movement
 {
-    [SerializeField]
-    private GameObject _enemyLaser;
-
     private bool _isEnemyShooting;
     private bool _ignoreShooter = true;
 
@@ -61,10 +58,12 @@ public class Laser : Movement
         if (_ignoreShooter)
         {
             _ignoreShooter = false;
+            Debug.Log("Shooter");
         }
         else
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
+            Debug.Log("?");
 
             if (damageable != null)
             {

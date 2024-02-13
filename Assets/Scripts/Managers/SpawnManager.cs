@@ -57,7 +57,6 @@ public class SpawnManager : MonoBehaviour
             _availableSpawnPositions.AddRange(_xSpawnPositions);
 
             int difficultyIndex = SelectWaveDifficulty();
-            Debug.Log(_waveDifficulties[difficultyIndex].name);
 
             int randomWaveIndex = Random.Range(0, _waveDifficulties[difficultyIndex].waves.Length);
 
