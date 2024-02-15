@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class SpawnManager : MonoBehaviour
     private float[] _xSpawnPositions;
     [SerializeField]
     private WaveDifficulty[] _waveDifficulties;
+
+    public static Func<bool> onPlayerShieldActionTime;
 
     private HashSet<float> _availableSpawnPositions;
 
@@ -54,6 +58,8 @@ public class SpawnManager : MonoBehaviour
     {
         while (!stopSpawning)
         {
+            yield return new WaitForSeconds(_delayTime);
+
             _availableSpawnPositions.AddRange(_xSpawnPositions);
 
             int difficultyIndex = SelectWaveDifficulty();
@@ -82,12 +88,15 @@ public class SpawnManager : MonoBehaviour
                 float xSpawnPosition = _availableSpawnPositions.ElementAt(randomIndex);
                 GameObject boosterPref = _waveDifficulties[difficultyIndex].waves[randomWaveIndex].powerups[i];
 
+                if (onPlayerShieldActionTime.Invoke() && boosterPref.TryGetComponent<ShieldBoost>(out ShieldBoost component))
+                {
+                    continue;
+                }
+
                 SpawnBoosters(xSpawnPosition, boosterPref);
 
                 _availableSpawnPositions.Remove(xSpawnPosition);
             }
-
-            yield return new WaitForSeconds(_delayTime);
         }
     }
 

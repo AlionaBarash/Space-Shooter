@@ -58,12 +58,10 @@ public class Laser : Movement
         if (_ignoreShooter)
         {
             _ignoreShooter = false;
-            Debug.Log("Shooter");
         }
         else
         {
             IDamageable damageable = other.GetComponent<IDamageable>();
-            Debug.Log("?");
 
             if (damageable != null)
             {

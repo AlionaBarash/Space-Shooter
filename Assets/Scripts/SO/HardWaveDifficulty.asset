@@ -182,9 +182,6 @@ MonoBehaviour:
       isExplosing: 1
   - powerups:
     - {fileID: 2319361191425325292, guid: 279b820430ead1541bb290c3f79b7fcb, type: 3}
-    enemies: []
-  - powerups:
-    - {fileID: 2319361191425325292, guid: 279b820430ead1541bb290c3f79b7fcb, type: 3}
     - {fileID: 534679620534909630, guid: 618c3d1075a458d41a1481ccfb513abb, type: 3}
     enemies: []
   - powerups:

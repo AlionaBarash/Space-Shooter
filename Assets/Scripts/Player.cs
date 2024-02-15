@@ -42,6 +42,8 @@ public class Player : Movement, IDamageable
     void Start()
     {
         _powerUps = new List<IPowerUp>();
+
+        SpawnManager.onPlayerShieldActionTime += BoosterImpact<ShieldBoost>;
     }
 
     void Update()
@@ -204,5 +206,10 @@ public class Player : Movement, IDamageable
                 break;
             }
         }
+    }
+
+    void OnDestroy()
+    {
+        SpawnManager.onPlayerShieldActionTime += BoosterImpact<ShieldBoost>;
     }
 }
