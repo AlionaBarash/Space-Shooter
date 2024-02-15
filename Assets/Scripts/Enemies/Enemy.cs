@@ -9,12 +9,13 @@ public class Enemy : Movement, IDamageable
     [SerializeField]
     private GameObject _explosionPrefab;
 
-    private Collider2D _collider;
-
+    protected int _damagePoints;
     protected bool _isSelfDestroyed;
     protected bool _isShooting;
 
-    public static Action onEnemyDamage;
+    public static Action<int> onEnemyDamage;
+
+    private Collider2D _collider;
 
     void OnEnable()
     {
@@ -41,7 +42,7 @@ public class Enemy : Movement, IDamageable
     {
         if (!_isSelfDestroyed)
         {
-            onEnemyDamage?.Invoke();
+            onEnemyDamage?.Invoke(_damagePoints);
         }
 
         GameObject explosion = Instantiate(_explosionPrefab, transform.position, Quaternion.identity);

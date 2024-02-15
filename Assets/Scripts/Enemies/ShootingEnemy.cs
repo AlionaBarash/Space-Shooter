@@ -12,6 +12,8 @@ public class ShootingEnemy : Enemy
 
     void Start()
     {
+        _damagePoints = _isShooting ? 30 : 10;
+
         if (_isShooting)
         {
             StartCoroutine(Shoot());

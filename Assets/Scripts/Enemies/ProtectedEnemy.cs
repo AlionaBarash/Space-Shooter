@@ -9,6 +9,8 @@ public class ProtectedEnemy : Enemy
 
     void Start()
     {
+        _damagePoints = 20;
+
         _animator = GetComponent<Animator>();
     }
 

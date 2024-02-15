@@ -60,9 +60,9 @@ public class HUD_UI : MonoBehaviour
         _livesImage.sprite = _livesSprites[playerHealth];
     }
 
-    private void UpdateScore()
+    private void UpdateScore(int damagePoints)
     {
-        _score += 10;
+        _score += damagePoints;
 
         _scoreText.text = "SCORE: " + _score;
 

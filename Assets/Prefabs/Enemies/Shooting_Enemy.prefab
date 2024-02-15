@@ -163,5 +163,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _explosionPrefab: {fileID: 2527495694692068747, guid: 52ceb08582738034e8be8754ccde1031, type: 3}
+  _damagePoints: 10
   _enemyLaserPrefab: {fileID: 8090296054398346150, guid: bfaa7315e17d220448b40a7566d3c838, type: 3}
   _yEnemyLaserPosition: -0.53

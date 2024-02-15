@@ -6,6 +6,8 @@ public class ExplodingEnemy : Enemy
 {
     void Start()
     {
+        _damagePoints = _isSelfDestroyed ? 30 : 10;
+
         if (_isSelfDestroyed)
         {
             StartCoroutine(Explode());
